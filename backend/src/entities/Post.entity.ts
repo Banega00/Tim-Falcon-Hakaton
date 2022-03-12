@@ -1,6 +1,5 @@
 import { Species } from './Species.entity';
-import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
-import { v4 as uuidv4 } from 'uuid';
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { User } from './User.entity';
 @Entity()
 export class Post{
@@ -26,6 +25,7 @@ export class Post{
         this.title = post?.title ?? '' 
         this.mainText = post?.mainText ?? '' 
         this.user = post?.user
+        this.relatedSpecies = post?.relatedSpecies
         // this.relatedSpecies = post?.relatedSpecies ?? ''
     }
 }

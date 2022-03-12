@@ -23,7 +23,7 @@ export const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    const childWindow = window.open('http://localhost:3000/login/google', "mywindow", "location=1,status=1,scrollbars=1, width=800,height=800");
+    const childWindow = window.open('http://192.168.43.189:3000/login/google', "mywindow", "location=1,status=1,scrollbars=1, width=800,height=800");
     
     let timer: NodeJS.Timeout | null = null;
     if(childWindow){

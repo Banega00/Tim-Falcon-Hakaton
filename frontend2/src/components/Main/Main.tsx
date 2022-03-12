@@ -22,6 +22,14 @@ const Main = () => {
       <div className={styles.cloudimg}>
           <img src={cloudImg}/>
       </div>
+
+      <div className={styles.info}>
+        <div className={styles.row}>
+          <div className={styles.card}></div>
+          <div className={styles.card}></div>
+          <div className={styles.card}></div>
+        </div>
+      </div>
     </div>
   )
 }

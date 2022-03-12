@@ -16,9 +16,14 @@
     width: 600px;
     right: 30%;
     bottom: 220px;
+    transition: all .3s ease;
     img {
       filter: brightness(100%);
       width: 100%;
+    }
+
+    &:hover {
+      transform: scale(1.2);
     }
   }
 
@@ -47,6 +52,35 @@
       user-select: none;
     }
   }
+
+  .info {
+    position: absolute;
+    top: 80%;
+    width: 70%;
+    max-width: 700px;
+    height: 230px;
+    background: white;
+    border-radius: 20px;
+    border: 2px solid var(--lightGray);
+
+    .row {
+      width: 100%;
+      height: 50%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+
+      .card {
+        width: 100px;
+        height: 70%;
+        margin: 15px 10px 0 10px;
+        border-radius: 20px;
+        //border: 2px solid var(--lightGray);
+        background: whitesmoke;
+        box-shadow: 5px 10px 30px rgba(0,0,0,.157);
+      }
+    }
+  }
 }
 
 @media screen and (max-width: 1300px) {
@@ -59,6 +93,7 @@
       top: 55%;
       right: -200px;
     }
+
   }
   
 }

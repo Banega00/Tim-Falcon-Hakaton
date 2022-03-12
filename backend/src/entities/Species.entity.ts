@@ -27,7 +27,13 @@ export class Species{
     @JoinTable()
     animalProfiles:AnimalProfile[] | undefined;
 
-    @Column("string", { array: true })
+    @Column(
+        'simple-array',
+        {
+            nullable: false,
+            default: []
+        }
+    )
     images: string[] | undefined;
 
     constructor(species?: Partial<Species>) {

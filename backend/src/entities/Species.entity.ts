@@ -1,5 +1,6 @@
 import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { v4 as uuidv4 } from 'uuid';
+import { Post } from "./Post.entity";
 @Entity()
 export class Species{
     @PrimaryGeneratedColumn()
@@ -18,10 +19,9 @@ export class Species{
     @Column({nullable: true})
     description?: string;
 
-    
-    @ManyToMany(() => Species)
+    @ManyToMany(() => Post)
     @JoinTable()
-    relatedSpecies:Species[] | undefined;
+    relatedSpecies:Post[] | undefined;
   
 
     constructor(species?: Partial<Species>) {

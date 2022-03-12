@@ -1,5 +1,6 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from "typeorm";
 import { v4 as uuidv4 } from 'uuid';
+import { Post } from "./Post.entity";
 @Entity()
 export class User{
     @PrimaryColumn()
@@ -13,6 +14,10 @@ export class User{
 
     @Column({nullable: true})
     name: string;
+
+    @ManyToMany(() => Post)
+    @JoinTable()
+    relatedSpecies:Post[] | undefined;
 
     constructor(user?: Partial<User>) {
         this.id = user?.id ?? uuidv4();

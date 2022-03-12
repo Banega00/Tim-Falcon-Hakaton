@@ -1,0 +1,50 @@
+.main {
+  background: linear-gradient( rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.001) ), url("../../images/pexels-munkee-panic-1027393.jpg");
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .falconimg {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 600px;
+    right: 150px;
+    bottom: 200px;
+    img {
+      filter: brightness(100%);
+      width: 100%;
+    }
+  }
+
+  .cloudimg {
+    position: absolute;
+    bottom: -220px;
+    right: -170px;
+    width: calc(100% + 350px);
+    overflow-x: hidden;
+    img {
+      filter: brightness(100%);
+      width: 100%;
+    }
+  }
+
+  .title {
+    margin-bottom: 150px;
+    h1 {
+      margin: 0;
+      font-size: 250px;
+      color: whitesmoke;
+      position: relative;
+      text-shadow: -15px 5px 20px #7a7a7a;
+      letter-spacing: -0.05em;
+      font-family: "Anton", Arial, SansSerif;
+      user-select: none;
+    }
+  }
+}

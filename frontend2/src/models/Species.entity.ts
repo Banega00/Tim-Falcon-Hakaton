@@ -6,7 +6,7 @@ export type GeoData = [number, number]
 export class Species{
     id: number | undefined;
     name: string;
-    alive?: number;
+    alive: number[];
 
     // @Column({nullable: true})
     // dead?: number;
@@ -19,7 +19,7 @@ export class Species{
     constructor(species?: Partial<Species>) {
         species?.id && (this.id = species.id)
         this.name = species?.name ?? '' 
-        this.alive = species?.alive ?? 0 
+        this.alive = species?.alive ?? []
         // this.dead = species?.dead ?? 0
         this.description = species?.description ?? '' 
         this.animalProfiles = species?.animalProfiles

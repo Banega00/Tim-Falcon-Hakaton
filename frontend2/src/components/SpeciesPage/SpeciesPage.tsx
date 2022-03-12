@@ -50,7 +50,7 @@ export const SpeciesPage: React.FC<any> = () => {
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
         </Marker>
-        {geoData && geoData.map(polygon => <Polygon pathOptions={{ color: 'black', fillColor: colorBasedOnNumber(speciesData?.alive), weight: 1, fillOpacity:0.5 }} positions={flipCoordinatesArray(polygon)} />)})
+        {geoData && speciesData?.alive && geoData.map((polygon, index) => <Polygon pathOptions={{ color: 'black', fillColor: colorBasedOnNumber(speciesData?.alive[index]), weight: 1, fillOpacity:0.5 }} positions={flipCoordinatesArray(polygon)} />)})
       </MapContainer>
 
       <div>

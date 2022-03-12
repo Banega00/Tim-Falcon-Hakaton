@@ -12,7 +12,13 @@ export class Species{
     @Column({unique: true})
     name: string;
 
-    @Column({nullable: true})
+    @Column(
+        'simple-array',
+        {
+            nullable: false,
+            default: []
+        }
+    )
     alive?: number[];
 
     // @Column({nullable: true})

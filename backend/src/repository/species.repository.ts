@@ -23,9 +23,10 @@ export class _SpeciesRepository{
 
     public async findById(speciesId: number, entityManager?: EntityManager): Promise<Species|undefined>{
         const manager = entityManager || getManager();
-        return await manager.findOne(Species,  {where: {id: speciesId},
-            relations: ['animalProfiles', 'posts'] 
-            })
+        // return await manager.findOne(Species,  {where: {id: speciesId}, 
+        //     relations: ['animalProfiles', 'posts'] 
+        //     })
+            return await manager.findOne(Species, speciesId, {relations:['animalProfiles', 'posts']})
     }
 
     // public async findByEmail(email: string, entityManager?: EntityManager): Promise<Species|undefined>{

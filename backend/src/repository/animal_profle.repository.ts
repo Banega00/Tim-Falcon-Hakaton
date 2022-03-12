@@ -5,7 +5,12 @@ export class _AnimalProfileRepository{
 
     public async getAll(entityManager?: EntityManager) {
         const manager = entityManager || getManager();
-        return manager.find(AnimalProfile)
+
+        let animalProfile;
+        animalProfile = manager.find(AnimalProfile)
+        animalProfile.geoData.map(element=>JSON.parse(element)) 
+        return animalProfile
+        
     }
     
     public async deleteById(id: number, entityManager?: EntityManager) {
@@ -23,7 +28,10 @@ export class _AnimalProfileRepository{
 
     public async findById(animalProfileId: number, entityManager?: EntityManager): Promise<AnimalProfile|undefined>{
         const manager = entityManager || getManager();
-        return await manager.findOne(AnimalProfile, animalProfileId)
+        let animalProfile;
+        animalProfile = await manager.findOne(AnimalProfile, animalProfileId,{relations: ['species', 'images', 'geoData']})
+        animalProfile.geoData = JSON.parse(animalProfile?.geoData)
+        return animalProfile
     }
 
     // public async findByEmail(email: string, entityManager?: EntityManager): Promise<Species|undefined>{

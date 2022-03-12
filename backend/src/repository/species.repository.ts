@@ -5,7 +5,10 @@ export class _SpeciesRepository{
 
     public async getAll(entityManager?: EntityManager) {
         const manager = entityManager || getManager();
-        return manager.find(Species)
+        let species;
+        species = await manager.find(Species)
+        species.geoData = species.geoData.map(element=>JSON.parse(element)) 
+        return species
     }
     
     public async deleteById(id: number, entityManager?: EntityManager) {
@@ -23,9 +26,6 @@ export class _SpeciesRepository{
 
     public async findById(speciesId: number, entityManager?: EntityManager): Promise<Species|undefined>{
         const manager = entityManager || getManager();
-        // return await manager.findOne(Species,  {where: {id: speciesId}, 
-        //     relations: ['animalProfiles', 'posts'] 
-        //     })
         let species;
         species = await manager.findOne(Species, speciesId, {relations:['animalProfiles', 'posts']})
         species.alive = JSON.parse(species.alive)

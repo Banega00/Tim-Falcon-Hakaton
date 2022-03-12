@@ -1,4 +1,4 @@
-import { Species } from './Species.entity';
+import { GeoData, Species } from './Species.entity';
 import { Column, Entity, JoinTable, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -24,6 +24,15 @@ export class AnimalProfile{
         }
     )
     images?: string[] | undefined;
+
+    @Column(
+        'simple-array',
+        {
+            nullable: false,
+            default: []
+        }
+    )
+    geoData?: GeoData[] | undefined;
 
     constructor(animalProfile?: Partial<AnimalProfile>) {
         animalProfile?.id && (this.id = animalProfile.id)

@@ -2,7 +2,7 @@ import { AnimalProfile } from './AnimalProfile.entity';
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Post } from "./Post.entity";
 
-type GeoData = [number, number]
+export type GeoData = [number, number]
 
 @Entity()
 export class Species{

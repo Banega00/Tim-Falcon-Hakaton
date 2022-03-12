@@ -23,7 +23,9 @@ export class _PostRepository{
 
     public async findById(postId: number, entityManager?: EntityManager): Promise<Post|undefined>{
         const manager = entityManager || getManager();
-        return await manager.findOne(Post, postId)
+        return await manager.findOne(Post, {where: {id: postId},
+        relations: ['user', 'relatedSpecies']
+        })
     }
 
     // public async findByEmail(email: string, entityManager?: EntityManager): Promise<Species|undefined>{

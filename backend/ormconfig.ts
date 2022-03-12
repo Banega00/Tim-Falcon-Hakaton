@@ -11,7 +11,7 @@ export default {
   synchronize: env.orm.synchronize,
   logging: env.orm.logging,
   // dropSchema: true,
-  entities: [User],
+  entities: ["src/entities/**/*.ts"],
   migrations: ["src/migration/**/*.ts"],
   subscribers: ["src/subscriber/**/*.ts"],
   cli: {

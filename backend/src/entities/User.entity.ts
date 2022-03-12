@@ -1,4 +1,4 @@
-import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryColumn } from "typeorm";
 import { v4 as uuidv4 } from 'uuid';
 import { Post } from "./Post.entity";
 @Entity()
@@ -15,9 +15,9 @@ export class User{
     @Column({nullable: true})
     name: string;
 
-    @ManyToMany(() => Post)
+    @OneToMany(() => Post, post => post.user)
     @JoinTable()
-    relatedSpecies:Post[] | undefined;
+    posts?:Post[] | undefined;
 
     constructor(user?: Partial<User>) {
         this.id = user?.id ?? uuidv4();

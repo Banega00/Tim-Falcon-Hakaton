@@ -16,7 +16,7 @@ export class Organization{
 
     @ManyToOne(() => User, user => user.organizations)
     @JoinTable()
-    users: User | undefined;
+    users?: User | undefined;
 
 
     constructor(post?: Partial<Organization>) {

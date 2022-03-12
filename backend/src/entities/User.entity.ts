@@ -22,7 +22,7 @@ export class User{
 
     @OneToMany(() => Organization, organization => organization.users)
     @JoinTable()
-    organizations:Organization[] | undefined;
+    organizations? :Organization[] | undefined;
 
     constructor(user?: Partial<User>) {
         this.id = user?.id ?? uuidv4();

@@ -14,11 +14,11 @@ export class Post{
 
     @ManyToMany(() => Species)
     @JoinTable()
-    relatedSpecies:Species[] | undefined;
+    relatedSpecies?:Species[] | undefined;
 
     @ManyToOne(() => User, user => user.posts)
     @JoinTable()
-    user:User | undefined;
+    user?:User | undefined;
 
     constructor(post?: Partial<Post>) {
         post?.id && (this.id = post.id)

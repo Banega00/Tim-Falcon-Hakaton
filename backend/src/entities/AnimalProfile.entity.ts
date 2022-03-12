@@ -14,7 +14,7 @@ export class AnimalProfile{
 
     @ManyToOne(() => Species, species => species.animalProfiles)
     @JoinTable()
-    species:Species | undefined;
+    species?:Species | undefined;
 
     @Column(
         'simple-array',
@@ -23,7 +23,7 @@ export class AnimalProfile{
             default: []
         }
     )
-    images: string[] | undefined;
+    images?: string[] | undefined;
 
     constructor(animalProfile?: Partial<AnimalProfile>) {
         animalProfile?.id && (this.id = animalProfile.id)

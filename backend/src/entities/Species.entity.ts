@@ -1,9 +1,9 @@
-import { Column, Entity, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { v4 as uuidv4 } from 'uuid';
 @Entity()
 export class Species{
-    @PrimaryColumn()
-    id: string;
+    @PrimaryGeneratedColumn()
+    id: string | undefined;
 
     @Column({unique: true})
     name: string;
@@ -19,14 +19,16 @@ export class Species{
     description?: string;
 
     
+    @ManyToMany(() => Species)
+    @JoinTable()
+    relatedSpecies:Species[] | undefined;
   
 
     constructor(species?: Partial<Species>) {
-        this.id = species?.id ?? uuidv4();
+        species?.id && (this.id = species.id)
         this.name = species?.name ?? '' 
         this.alive = species?.alive ?? 0 
         this.dead = species?.dead ?? 0
         this.description = species?.description ?? '' 
-
     }
 }

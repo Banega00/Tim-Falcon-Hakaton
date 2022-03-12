@@ -30,8 +30,19 @@ const Header = () => {
         <img src={logoImg}/>
       </a>
 
-      <a onClick={menuClicked} className={menu ? styles.menu + " " + styles.clicked : styles.menu} href={'#'}>
+      <a onClick={menuClicked} className={menu ? styles.menu + " " + styles.clicked : styles.menu}>
         {menu ? <img src={closeIcon}/> : <img src={menuIcon}/>}
+        <ul className={menu ? styles.respNavItems + " " + styles.active : styles.respNavItems}>
+          <li>
+            <a href={'#'}>Home</a>
+          </li>
+          <li>
+            <a href={'#'}>About</a>
+          </li>
+          <li>
+            <a href={'#'}>Contact</a>
+          </li>
+        </ul>
       </a>
 
       <ul className={styles.navItems}>

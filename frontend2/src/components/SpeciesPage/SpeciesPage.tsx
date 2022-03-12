@@ -9,6 +9,14 @@ import { HttpService } from '../../utils/HttpService';
 import { GeoData, Species } from '../../models/Species.entity';
 import { ResponseModel } from '../../models/ResponseModel';
 
+export const colorBasedOnNumber = (num:number | undefined)=>{
+  if(!num) return 'black'
+  if(num < 10) return 'red'
+  if(num < 50) return 'orange'
+  if(num < 100) return 'yellow'
+  if(num < 500) return 'greem'
+}
+
 export const SpeciesPage: React.FC<any> = () => {
   let { id } = useParams();
   const [speciesData, setSpeciesData] = useState<Species | undefined>(undefined);
@@ -42,7 +50,7 @@ export const SpeciesPage: React.FC<any> = () => {
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
         </Marker>
-        {geoData && geoData.map(polygon => <Polygon pathOptions={{ color: 'black', fillColor: 'green', weight: 3 }} positions={flipCoordinatesArray(polygon)} />)})
+        {geoData && geoData.map(polygon => <Polygon pathOptions={{ color: 'black', fillColor: colorBasedOnNumber(speciesData?.alive), weight: 1, fillOpacity:0.5 }} positions={flipCoordinatesArray(polygon)} />)})
       </MapContainer>
 
       <div>

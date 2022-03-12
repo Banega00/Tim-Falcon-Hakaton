@@ -17,9 +17,13 @@ app.use(validateRequestPayload);
 
 configurePassport(app, passport);
 
-app.use(checkAuthenticated)
+// app.use(checkAuthenticated)
 //Set routers
 app.use('/', router.UserRouter)
+app.use('/', router.AnimalProfileRouter)
+app.use('/', router.PostRouter)
+app.use('/', router.SpeciesRouter)
+
 // app.use('/operation', routers.OperationsRouter);
 // app.use('/internal', routers.InternalRouter);
 // app.use('/report', routers.ReportsRouter);

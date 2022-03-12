@@ -10,6 +10,7 @@ import { HttpService } from "./utils/HttpService";
 import Main from "./components/Main/Main";
 import "./App.css";
 import { SpeciesPage } from "./components/SpeciesPage/SpeciesPage";
+import EndangeredSpecies from "./components/EndangeredSpecies/EndangeredSpecies";
 
 //Route Guard component
 const RequireAuth: React.FC<any> = ({ children }) => {
@@ -35,6 +36,7 @@ export default function App() {
           <Route path={'/'} element={<Main/>}/>
           <Route path="/login" element={<Login />} />
           <Route path="/species" element={<SpeciesPage />} />
+          <Route path="/endangeredspecies" element={ <EndangeredSpecies/> } />
           <Route path="/successGoogleLogin" element={<SuccessGoogleLogin />} />
           <Route
             path="/home"

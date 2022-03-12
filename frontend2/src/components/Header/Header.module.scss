@@ -1,0 +1,38 @@
+.headerContainer {
+  width: calc(100% - 40px);
+  position: fixed;
+  height: 100px;
+  padding: 5px 20px;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  align-items: center;
+  z-index: 1;
+
+  .logoImg {
+    img {
+      width: 100px;
+      transition: all .3s ease;
+    }
+  }
+
+  &.scroll {
+    background: whitesmoke;
+    a {
+      color: black;
+    }
+  }
+
+  ul {
+    display: flex;
+    list-style: none;
+    li {
+      margin: 0 1rem;
+      a {
+        font-size: 1.3rem;
+        color: whitesmoke;
+        text-decoration: none;
+      }
+    }
+  }
+}

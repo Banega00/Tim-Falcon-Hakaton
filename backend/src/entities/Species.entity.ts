@@ -51,7 +51,7 @@ export class Species{
             default: []
         }
     )
-    geoData?: GeoData[] | undefined;
+    geoData?: GeoData[][] | undefined;
 
     constructor(species?: Partial<Species>) {
         species?.id && (this.id = species.id)

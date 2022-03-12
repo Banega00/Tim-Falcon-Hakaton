@@ -6,8 +6,11 @@ export class _SpeciesRepository{
     public async getAll(entityManager?: EntityManager) {
         const manager = entityManager || getManager();
         let species;
-        species = await manager.find(Species)
-        species.geoData = species.geoData.map(element=>JSON.parse(element)) 
+        species = await manager.find(Species, {relations:['animalProfiles', 'posts']})
+       species.forEach(element => {
+           element.alive = JSON.parse(element.alive)
+           element.geoData = JSON.parse(element.geoData)
+       });
         return species
     }
     
@@ -29,6 +32,7 @@ export class _SpeciesRepository{
         let species;
         species = await manager.findOne(Species, speciesId, {relations:['animalProfiles', 'posts']})
         species.alive = JSON.parse(species.alive)
+        species.geoData = JSON.parse(species.geoData)
         return species
     }
 

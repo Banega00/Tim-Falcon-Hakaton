@@ -6,7 +6,7 @@ class _HttpService{
 
         constructor() {
         this.axiosInstance = axios.create({
-            baseURL: 'http://localhost:3000',
+            baseURL: 'http://localhost:3001',
             withCredentials: true
           });      
     }
@@ -28,7 +28,7 @@ class _HttpService{
     }
 
     getSpeciesData = async (id:string) => {
-        return await this.axiosInstance.post(`/species/${id}`);
+        return await this.axiosInstance.get(`/species/${id}`);
     }
 }
 

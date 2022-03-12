@@ -1,6 +1,7 @@
 import React from 'react';
+// import styles from './SpeciesPage.module.scss'
 import styles from './SpeciesPage.module.scss'
-import { MapContainer, TileLayer, Marker, Popup, Polygon, Polyline } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, Popup, Polygon } from 'react-leaflet'
 import slika from '../../images/beloglavi-sup-2.jpg'
 
 export const SpeciesPage: React.FC<any> = (props) => {

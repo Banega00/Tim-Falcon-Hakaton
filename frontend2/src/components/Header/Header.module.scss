@@ -8,6 +8,8 @@
   text-align: center;
   align-items: center;
   z-index: 1;
+  transition: all .3s ease;
+  font-family: "Poppins";
 
   .logoImg {
     img {
@@ -17,13 +19,33 @@
   }
 
   &.scroll {
+    box-shadow: 5px 10px 30px rgba(0,0,0,.157);
+    height: 70px;
     background: whitesmoke;
     a {
-      color: black;
+      color: var(--darkJungleGreen);
+    }
+    img {
+      width: 70px;
     }
   }
 
-  ul {
+  .menu {
+    img {
+      width: 2rem;
+      filter: invert(1);
+      transition: all .3s ease;
+    }
+
+    &.clicked {
+      img {
+        width: 1.5rem;
+      }
+    }
+  }
+
+
+  .navItems {
     display: flex;
     list-style: none;
     li {
@@ -35,4 +57,8 @@
       }
     }
   }
+}
+
+@media screen and (max-width: 700px) {
+
 }

@@ -3,6 +3,7 @@ import styles from './EndangeredSpeciesCard.module.scss';
 
 const EndangeredSpeciesCard = ({ img, text, left, habitat }) => {
     return(
+<section className={styles.endangeredSpeciesCard}>
 <div className={styles.container}>
   <div className={styles.card}>
     <div className={styles.imgBx}>
@@ -22,6 +23,7 @@ const EndangeredSpeciesCard = ({ img, text, left, habitat }) => {
     </div>
   </div>
 </div>
+</section>
     )
 }
 

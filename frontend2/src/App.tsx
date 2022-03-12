@@ -34,7 +34,7 @@ export default function App() {
         <Routes>
           <Route path={'/'} element={<Main/>}/>
           <Route path="/login" element={<Login />} />
-          <Route path="/species" element={<SpeciesPage />} />
+          <Route path="/species/:id" element={<SpeciesPage />} />
           <Route path="/endangeredspecies" element={ <EndangeredSpecies/> } />
           <Route path="/successGoogleLogin" element={<SuccessGoogleLogin />} />
           <Route

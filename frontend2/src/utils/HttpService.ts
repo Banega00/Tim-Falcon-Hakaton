@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 
 class _HttpService{
+  
     axiosInstance:AxiosInstance
 
         constructor() {
@@ -24,6 +25,10 @@ class _HttpService{
 
     async loginWithGoogle() {
         return await this.axiosInstance.get("/login/google")
+    }
+
+    getSpeciesData = async (id:string) => {
+        return await this.axiosInstance.post(`/species/${id}`);
     }
 }
 

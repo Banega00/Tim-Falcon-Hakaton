@@ -9,6 +9,7 @@ import { SuccessGoogleLogin } from "./components/SuccessGoogleLogin/SuccessGoogl
 import { HttpService } from "./utils/HttpService";
 import Main from "./components/Main/Main";
 import "./App.css";
+import { SpeciesPage } from "./components/SpeciesPage/SpeciesPage";
 
 //Route Guard component
 const RequireAuth: React.FC<any> = ({ children }) => {
@@ -33,6 +34,7 @@ export default function App() {
         <Routes>
           <Route path={'/'} element={<Main/>}/>
           <Route path="/login" element={<Login />} />
+          <Route path="/species" element={<SpeciesPage />} />
           <Route path="/successGoogleLogin" element={<SuccessGoogleLogin />} />
           <Route
             path="/home"

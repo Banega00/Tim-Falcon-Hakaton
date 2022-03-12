@@ -7,6 +7,8 @@ import { Navbar } from "./components/Navbar/Navbar";
 import { Profile } from "./components/Profile/Profile";
 import { SuccessGoogleLogin } from "./components/SuccessGoogleLogin/SuccessGoogleLogin";
 import { HttpService } from "./utils/HttpService";
+import Main from "./components/Main/Main";
+import "./App.css";
 
 //Route Guard component
 const RequireAuth: React.FC<any> = ({ children }) => {
@@ -29,6 +31,7 @@ export default function App() {
       {/* <Nav /> */}
       <BrowserRouter>
         <Routes>
+          <Route path={'/'} element={<Main/>}/>
           <Route path="/login" element={<Login />} />
           <Route path="/successGoogleLogin" element={<SuccessGoogleLogin />} />
           <Route

@@ -36,7 +36,7 @@ export class Species{
             default: []
         }
     )
-    images?: GeoData[][] | undefined;
+    images?: string[] | undefined;
 
     @Column(
         'simple-array',
@@ -45,7 +45,7 @@ export class Species{
             default: []
         }
     )
-    geoData?: string[] | undefined;
+    geoData?: GeoData[] | undefined;
 
     constructor(species?: Partial<Species>) {
         species?.id && (this.id = species.id)

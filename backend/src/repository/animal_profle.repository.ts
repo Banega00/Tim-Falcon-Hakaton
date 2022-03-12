@@ -8,7 +8,7 @@ export class _AnimalProfileRepository{
         return manager.find(AnimalProfile)
     }
     
-    public async deleteById(id: string, entityManager?: EntityManager) {
+    public async deleteById(id: number, entityManager?: EntityManager) {
         const manager = entityManager || getManager();
         return manager.delete(AnimalProfile, id)
     }

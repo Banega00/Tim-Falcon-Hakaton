@@ -5,7 +5,7 @@ import { Post } from "./Post.entity";
 @Entity()
 export class Species{
     @PrimaryGeneratedColumn()
-    id: string | undefined;
+    id: number | undefined;
 
     @Column({unique: true})
     name: string;

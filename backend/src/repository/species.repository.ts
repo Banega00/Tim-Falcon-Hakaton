@@ -18,11 +18,10 @@ export class _SpeciesRepository{
         const species = await this.findById(speciesData.id)
         if(species) return species;
 
-
         await this.addNewSpecies(new Species(speciesData));
     }
 
-    public async findById(speciesId: string, entityManager?: EntityManager): Promise<Species|undefined>{
+    public async findById(speciesId: number, entityManager?: EntityManager): Promise<Species|undefined>{
         const manager = entityManager || getManager();
         return await manager.findOne(Species, speciesId)
     }

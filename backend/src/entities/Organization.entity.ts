@@ -8,11 +8,13 @@ export class Organization{
     id: number | undefined;
 
     @Column({unique: true})
-    title: string;
+    name: string;
 
     @Column({nullable: true})
-    mainText: string;
+    description: string;
 
+    @Column({nullable: true})
+    location: string;
     // @OneToMany(() => User)
     // @JoinTable()
     // userId:User[] | undefined;
@@ -20,8 +22,9 @@ export class Organization{
 
     constructor(post?: Partial<Organization>) {
         post?.id && (this.id = post.id)
-        this.title = post?.title ?? '' 
-        this.mainText = post?.mainText ?? '' 
+        this.name = post?.name ?? '' 
+        this.description = post?.description ?? '' 
+        this.location = post?.location ?? '' 
         // this.relatedSpecies = post?.relatedSpecies ?? ''
     }
 }

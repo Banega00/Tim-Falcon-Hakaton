@@ -1,12 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { delete_cookie, useAuth } from '../../utils/Auth';
+import { HttpService } from '../../utils/HttpService';
 
 export const Navbar: React.FC<any> = (props) => {
     const { authed, logout } = useAuth();
     const navigate = useNavigate();
 
-    const handleLogOut = () =>{
+    
+
+
+
+    const handleLogOut = () => {
         logout();
         delete_cookie('connect.sid')
         localStorage.removeItem('user');
@@ -29,9 +34,9 @@ export const Navbar: React.FC<any> = (props) => {
                         </li>
                     </>
                     :
-                        <li>
-                            <Link to="/login">Log in</Link>
-                        </li>
+                    <li>
+                        <Link to="/login">Log in</Link>
+                    </li>
                 }
 
             </ul>

@@ -85,7 +85,7 @@ const Header = ({ isMain }) => {
             <a href={'/logout'}>My Animals</a>
           </li>
           <li>
-            <a onClick={handleLogOut}>Log out</a>
+            <a onClick={handleLogOut}>Profile</a>
           </li>
           </>
           :

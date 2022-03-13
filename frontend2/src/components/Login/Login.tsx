@@ -17,7 +17,6 @@ export const Login = () => {
     const password = passwordInput.current?.value
     login(email!, password!).then((response: ResponseModel) => {
       
-      localStorage.setItem('user', JSON.stringify({ name: 'pera' }))
       navigate((state as any)?.path || "/");
     }).catch((error: ResponseModel) => {
       setServerResponse(error);

@@ -16,7 +16,7 @@ export enum ContinentEnum  {
 
 }
 export enum Biome {
-    Aquatic = 'Aquatic',
+    Water = 'Water',
     Grassland = 'Grassland',
     Forest = 'Forest',
     Desert = 'Desert',

@@ -7,7 +7,7 @@ class _HttpService{
 
         constructor() {
         this.axiosInstance = axios.create({
-            baseURL: 'http://localhost:3000',
+            baseURL: 'http://192.168.43.189:3000',
             withCredentials: true
           });      
     }

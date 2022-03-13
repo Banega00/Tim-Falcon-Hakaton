@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../utils/Auth";
 import { ResponseModel } from "../../models/ResponseModel";
 import styles from './Login.module.scss'
+import styles1 from '../SpeciesPage/SpeciesPage.module.scss';
 
 export const Login = () => {
   const emailInput = useRef<HTMLInputElement>(null);
@@ -24,7 +25,7 @@ export const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    const childWindow = window.open('http://localhost:3000/login/google', "mywindow", "location=1,status=1,scrollbars=1, width=800,height=800");
+    const childWindow = window.open('http://192.168.43.189:3000/login/google', "mywindow", "location=1,status=1,scrollbars=1, width=800,height=800");
     
     let timer: NodeJS.Timeout | null = null;
     if(childWindow){
@@ -38,18 +39,21 @@ export const Login = () => {
   }
 
   return (
-    <div className={styles.main}>
-      <label htmlFor="email">Email:
-        <input ref={emailInput} type="text" name="email" />
-      </label>
-      <label htmlFor="password">Password:
-        <input ref={passwordInput} type="password" name="password" />
-      </label>
-      <button onClick={handleLogin}>Log in</button>
-      <button onClick={handleGoogleLogin}>Sing in with google</button>
+    <div className={styles1.container}>
+      <div className={styles1.main + " " + styles.main}>
+        <h1>LOGIN</h1>
+        <label htmlFor="email">
+          <input ref={emailInput} placeholder={"Email"} type="text" name="email" />
+        </label>
+        <label htmlFor="password">
+          <input ref={passwordInput} placeholder={"Password"} type="password" name="password" />
+        </label>
+        <button className={styles.loginBtn} onClick={handleLogin}>Log in</button>
+        <button className={styles.signinBtn} onClick={handleGoogleLogin}>Sing in with google</button>
 
-      {/* if server response exists log it*/}
-      {serverResponse && <div>{serverResponse.payload.message}</div>}
+        {/* if server response exists log it*/}
+        {serverResponse && <div><p className={styles.error}>{serverResponse.payload.message}</p></div>}
+      </div>
     </div>
   );
 };

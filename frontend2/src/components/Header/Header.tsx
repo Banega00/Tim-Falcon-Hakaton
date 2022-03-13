@@ -6,6 +6,7 @@ import closeIcon from '../../images/close.png';
 import { delete_cookie, useAuth } from "../../utils/Auth";
 import { useNavigate } from "react-router-dom";
 import { HttpService } from "../../utils/HttpService";
+import {getUser} from "../../utils/util-functions";
 
 const Header = ({ isMain }) => {
 
@@ -54,6 +55,8 @@ const Header = ({ isMain }) => {
       setMenu(true);
   }
 
+  const[toggleProfile, setToggleProfile] = useState(false);
+
   return (
     <div className={scroll ? styles.headerContainer + " " + styles.scroll : styles.headerContainer}>
       <a className={styles.logoImg} href={'#'}>
@@ -97,7 +100,20 @@ const Header = ({ isMain }) => {
               <a href={'/logout'}>My Animals</a>
             </li>
             <li>
-              <a onClick={handleLogOut}>Profile</a>
+              {/*<a onClick={handleLogOut}>Profile</a>*/}
+              <a onClick={() => {
+                if (toggleProfile)
+                  setToggleProfile(false)
+                else
+                  setToggleProfile(true)
+              }}>Profile {toggleProfile ? <span>▼</span> : <span>▲</span>}</a>
+              {toggleProfile ?
+                <div className={styles.subProfile}>
+                  <a>{JSON.parse(localStorage.getItem('user')!).email}</a>
+                  <a>{JSON.parse(localStorage.getItem('user')!).name}</a>
+                  <a className={styles.logoutBtn} onClick={handleLogOut}>Logout</a>
+                </div> : <></>
+              }
             </li>
           </>
           :

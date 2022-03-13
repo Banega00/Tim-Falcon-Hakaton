@@ -33,7 +33,7 @@ export class _UserRepository{
 
     public async saveUser(newUser: User, entityManager?: EntityManager) {
         const manager = entityManager || getManager();
-        return await manager.save(User, new User(newUser))
+        return await manager.save(User, newUser)
     }
 
 }

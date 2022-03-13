@@ -1,12 +1,12 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Header.module.scss";
 import logoImg from '../../images/falcon-logo-1.png';
 import menuIcon from '../../images/menu.png';
 import closeIcon from '../../images/close.png';
 
-const Header = ({isMain}) => {
+const Header = ({ isMain }) => {
 
-  const[scroll, setScroll] = useState(!isMain);
+  const [scroll, setScroll] = useState(!isMain);
 
   // if (isMain)
   //   setScroll(true);
@@ -20,7 +20,7 @@ const Header = ({isMain}) => {
     }
   })
 
-  const[menu, setMenu] = useState(false);
+  const [menu, setMenu] = useState(false);
 
   const menuClicked = () => {
     if (menu)
@@ -32,11 +32,11 @@ const Header = ({isMain}) => {
   return (
     <div className={scroll ? styles.headerContainer + " " + styles.scroll : styles.headerContainer}>
       <a className={styles.logoImg} href={'#'}>
-        <img src={logoImg}/>
+        <img src={logoImg} />
       </a>
 
       <a onClick={menuClicked} className={menu ? styles.menu + " " + styles.clicked : styles.menu}>
-        {menu ? <img src={closeIcon}/> : <img src={menuIcon}/>}
+        {menu ? <img src={closeIcon} /> : <img src={menuIcon} />}
         <ul className={menu ? styles.respNavItems + " " + styles.active : styles.respNavItems}>
           <li>
             <a href={'#'}>Home</a>
@@ -63,9 +63,25 @@ const Header = ({isMain}) => {
         <li>
           <a href={'#'}>Contact</a>
         </li>
-        <li>
+        {localStorage.getItem('user') == '' ?
+          <li>
             <a href={'/login'}>Log in</a>
+          </li> :
+          <>
+          <li>
+            <a href={'/logout'}>Log out</a>
           </li>
+          <li>
+            <a href={'/logout'}>My Animals</a>
+          </li>
+          <li>
+            <a href={'/logout'}>My Species</a>
+          </li>
+          </>
+          
+        }
+
+
       </ul>
     </div>
   )

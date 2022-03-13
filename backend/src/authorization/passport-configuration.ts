@@ -122,7 +122,7 @@ export const configurePassport = (app: Application, passport: PassportStatic) =>
     const newUser:User = request.body
 
     try{
-      await UserRepository.addNewUser(newUser);
+      await UserRepository.saveUser(newUser);
 
     }catch(error){
       console.log("Error while registering user: " , error);

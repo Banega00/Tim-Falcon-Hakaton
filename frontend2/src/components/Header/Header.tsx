@@ -5,18 +5,31 @@ import menuIcon from '../../images/menu.png';
 import closeIcon from '../../images/close.png';
 import { delete_cookie, useAuth } from "../../utils/Auth";
 import { useNavigate } from "react-router-dom";
+import { HttpService } from "../../utils/HttpService";
 
 const Header = ({ isMain }) => {
 
-  const { authed, logout } = useAuth();
-    const navigate = useNavigate();
+  const [aut, setAut] = useState<boolean>(false);
+  useEffect(() => {
+    HttpService.checkAuth()
+      .then(response => {
+        localStorage.setItem("user", JSON.stringify(response.data.payload.user))
+        setAut(true)
+      })
+      .catch(responst => {
+        setAut(false)
+      });
+  }, [])
 
-    const handleLogOut = () =>{
-        logout();
-        delete_cookie('connect.sid')
-        localStorage.removeItem('user');
-        navigate('/')
-    }
+  const { authed, logout } = useAuth();
+  const navigate = useNavigate();
+
+  const handleLogOut = () => {
+    logout();
+    delete_cookie('connect.sid')
+    localStorage.removeItem('user');
+    navigate('/')
+  }
 
   const [scroll, setScroll] = useState(!isMain);
 
@@ -75,18 +88,17 @@ const Header = ({ isMain }) => {
         <li>
           <a href={'#'}>Contact</a>
         </li>
-        {console.log(localStorage.getItem('user'))}
         {localStorage.getItem('user') ?
           <>
-          <li>
-            <a href={'/logout'}>My Species</a>
-          </li>
-          <li>
-            <a href={'/logout'}>My Animals</a>
-          </li>
-          <li>
-            <a onClick={handleLogOut}>Log out</a>
-          </li>
+            <li>
+              <a href={'/logout'}>My Species</a>
+            </li>
+            <li>
+              <a href={'/logout'}>My Animals</a>
+            </li>
+            <li>
+              <a onClick={handleLogOut}>Profile</a>
+            </li>
           </>
           :
           <li>

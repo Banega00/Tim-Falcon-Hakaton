@@ -4,6 +4,7 @@ import { Request, Response } from "express";
 import { sendResponse } from '../utils/wrappers/response-wrapper';
 import { SuccessStatusCode } from '../utils/status-codes';
 import { SpeciesRepository } from '../repository/species.repository';
+import { AnimalProfileRepository } from '../repository/animal_profle.repository';
 
 export class UserController{
 
@@ -36,7 +37,24 @@ export class UserController{
             return sendResponse(response, 500, ErrorStatusCode.Failure, error);
         }
     }
-
+    followAnAnimal = async (request: Request, response: Response) =>{
+        const { id } = request.params;
+        console.log(request.session.passport);
+        
+        try{
+            if(!request.session.passport)return  sendResponse(response, 500, ErrorStatusCode.Failure, 'Nema usera');
+            const user = await UserRepository.findById(request.session.passport.id)
+            const animalProfiles = await AnimalProfileRepository.findById(+id)
+            if(!animalProfiles)return  sendResponse(response, 500, ErrorStatusCode.Failure, 'Nema animal');
+            user?.animalProfiles?.push(animalProfiles)
+            if(!user) return sendResponse(response, 404, ErrorStatusCode.UserNotFound)
+            await UserRepository.saveUser(user)
+            return sendResponse(response, 200, SuccessStatusCode.Success, user)
+        }catch(error){
+            console.log(error);
+            return sendResponse(response, 500, ErrorStatusCode.Failure, error);
+        }
+    }
     getUserById = async (request: Request, response: Response) =>{
         const { id } = request.params;
         try{

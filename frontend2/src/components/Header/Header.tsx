@@ -47,12 +47,15 @@ const Header = ({isMain}) => {
           <li>
             <a href={'#'}>Contact</a>
           </li>
+          <li>
+            <a href={'/login'}>Log in</a>
+          </li>
         </ul>
       </a>
 
       <ul className={styles.navItems}>
         <li>
-          <a href={'#'}>Home</a>
+          <a href={'/#'}>Home</a>
         </li>
         <li>
           <a href={'#'}>About</a>
@@ -60,6 +63,9 @@ const Header = ({isMain}) => {
         <li>
           <a href={'#'}>Contact</a>
         </li>
+        <li>
+            <a href={'/login'}>Log in</a>
+          </li>
       </ul>
     </div>
   )

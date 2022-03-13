@@ -70,6 +70,11 @@ export class Species{
         default: ConservationStatus.Endangered
     })
     conservationStatus: ConservationStatus;
+    @Column({nullable: true})
+    reasonOfEndangerment: string;
+
+    @Column({nullable: true})
+    howToHelp: string;
 
     @ManyToMany(() => Post)
     @JoinTable() 
@@ -112,6 +117,8 @@ export class Species{
         species?.id && (this.id = species.id)
         this.name = species?.name ?? '' 
         this.alive = species?.alive 
+        this.reasonOfEndangerment = species?.reasonOfEndangerment ?? ''
+        this.howToHelp = species?.howToHelp ?? '' 
         // this.dead = species?.dead ?? 0
         this.description = species?.description ?? '' 
         this.animalProfiles = species?.animalProfiles

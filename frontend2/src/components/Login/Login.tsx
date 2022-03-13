@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../../utils/Auth";
 import { ResponseModel } from "../../models/ResponseModel";
+import styles from './Login.module.scss'
 
 export const Login = () => {
   const emailInput = useRef<HTMLInputElement>(null);
@@ -9,12 +10,13 @@ export const Login = () => {
   const [serverResponse, setServerResponse] = useState<ResponseModel>();
   const navigate = useNavigate();
   const { state } = useLocation();
-  const { login, loginWithGoogle } = useAuth();
+  const { login } = useAuth();
 
   const handleLogin = () => {
     const email = emailInput.current?.value
     const password = passwordInput.current?.value
     login(email!, password!).then((response: ResponseModel) => {
+      
       localStorage.setItem('user', JSON.stringify({ name: 'pera' }))
       navigate((state as any)?.path || "/home");
     }).catch((error: ResponseModel) => {
@@ -23,7 +25,7 @@ export const Login = () => {
   };
 
   const handleGoogleLogin = () => {
-    const childWindow = window.open('http://192.168.43.189:3000/login/google', "mywindow", "location=1,status=1,scrollbars=1, width=800,height=800");
+    const childWindow = window.open('http://localhost:3000/login/google', "mywindow", "location=1,status=1,scrollbars=1, width=800,height=800");
     
     let timer: NodeJS.Timeout | null = null;
     if(childWindow){
@@ -37,7 +39,7 @@ export const Login = () => {
   }
 
   return (
-    <div>
+    <div className={styles.main}>
       <label htmlFor="email">Email:
         <input ref={emailInput} type="text" name="email" />
       </label>

@@ -36,7 +36,10 @@ export class _SpeciesRepository{
         species = await manager.findOne(Species, speciesId, {relations:['animalProfiles', 'posts']})
         species.alive = JSON.parse(species.alive)
         species.geoData = JSON.parse(species.geoData)
-        return species
+        species.images.forEach(element => {
+            element = JSON.parse(element.images)
+           });        
+           return species
     }
 
     // public async findByEmail(email: string, entityManager?: EntityManager): Promise<Species|undefined>{

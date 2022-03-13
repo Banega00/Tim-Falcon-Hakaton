@@ -33,15 +33,15 @@ const Main = () => {
         <div className={styles.row}>
           <div className={styles.card}>
             <p>Endangered spicies</p>
-            <CountUp duration={2} end={41415}></CountUp>
+            <CountUp className={styles.count} duration={2} end={41415}></CountUp>
           </div>
           <div className={styles.card}>
             <p>Extinct spicies</p>
-            <CountUp duration={2} end={50}></CountUp>
+            <CountUp className={styles.count} duration={2} end={50}></CountUp>
           </div>
           <div className={styles.card + " " + styles.newBtn}>
             <p>News</p>
-            <CountUp duration={2} end={30}></CountUp>
+            <CountUp className={styles.count} duration={2} end={30}></CountUp>
           </div>
         </div>
       </div>

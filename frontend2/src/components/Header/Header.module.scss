@@ -92,10 +92,17 @@ a:hover {
   a {
     color: var(--darkJungleGreen) !important;
     font-size: 0.9rem !important;
-    padding: 5px;
+    padding: 10px 5px;
     border-radius: 5px;
-    //border: 1px solid var(--lightGray);
+    border-top: 1px solid var(--lightGray);
+    span {
+      color: gray;
+    }
   }
+}
+
+.subNotProfile {
+  width: 200px;
 }
 
 .logoutBtn {

@@ -56,6 +56,8 @@ const Header = ({ isMain }) => {
   }
 
   const[toggleProfile, setToggleProfile] = useState(false);
+  const[toggleMySpecies, setToggleMySpecies] = useState(false);
+  const[toggleMyAnimals, setToggleMyAnimals] = useState(false);
 
   return (
     <div className={scroll ? styles.headerContainer + " " + styles.scroll : styles.headerContainer}>
@@ -94,10 +96,30 @@ const Header = ({ isMain }) => {
         {localStorage.getItem('user') ?
           <>
             <li>
-              <a href={'/logout'}>My Species</a>
+              <a onClick={() => {
+                if (toggleMySpecies)
+                  setToggleMySpecies(false)
+                else
+                  setToggleMySpecies(true)
+              }}>My Species {toggleMySpecies ? <span>▼</span> : <span>▲</span>}</a>
+              {toggleMySpecies ?
+                <div className={styles.subProfile + " " + styles.subNotProfile}>
+                  <a>Penguin</a>
+                  <a>Rhino</a>
+                </div> : <></>}
             </li>
             <li>
-              <a href={'/logout'}>My Animals</a>
+              <a onClick={() => {
+                if (toggleMyAnimals)
+                  setToggleMyAnimals(false)
+                else
+                  setToggleMyAnimals(true)
+              }}>My Species {toggleMyAnimals ? <span>▼</span> : <span>▲</span>}</a>
+              {toggleMyAnimals ?
+                <div className={styles.subProfile + " " + styles.subNotProfile}>
+                  <a><span>Penguin</span> Pera</a>
+                  <a><span>Rhino</span> Steva</a>
+                </div> : <></>}
             </li>
             <li>
               {/*<a onClick={handleLogOut}>Profile</a>*/}

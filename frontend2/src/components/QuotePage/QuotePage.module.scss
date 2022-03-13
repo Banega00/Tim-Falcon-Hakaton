@@ -1,0 +1,25 @@
+.quotepage {
+    min-height: 100vh;
+    background-color: var(--darkJungleGreen);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quote {
+    display: flex;
+    text-align: justify;
+    font-family: 'Poppins', sans-serif;
+    font-size: 2rem;
+    color: var(--lightGray);
+    margin-left: 20rem;
+    margin-right: 20rem;
+    margin-top: 15rem;
+}
+
+.quoteMark {
+    font-size: 5.5rem;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: 600;
+}
+

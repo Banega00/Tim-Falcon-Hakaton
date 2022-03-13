@@ -1,6 +1,7 @@
 import axios, { AxiosInstance } from "axios";
 
 class _HttpService{
+    
   
     axiosInstance:AxiosInstance
 
@@ -29,6 +30,10 @@ class _HttpService{
 
     getSpeciesData = async (id:string) => {
         return await this.axiosInstance.get(`/species/${id}`);
+    }
+
+    public async getAllSpecies() {
+        return await this.axiosInstance.get(`/species`);
     }
 }
 

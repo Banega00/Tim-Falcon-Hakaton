@@ -10,9 +10,6 @@ export class _SpeciesRepository{
        species.forEach(element => {
            element.alive = JSON.parse(element.alive)
            element.geoData = JSON.parse(element.geoData)
-           element.images.forEach(element => {
-            element = JSON.parse(element.images)
-           });
        });
         return species
     }

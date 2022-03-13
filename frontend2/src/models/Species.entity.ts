@@ -14,7 +14,7 @@ export class Species{
     // @Column({nullable: true})
     // dead?: number;
     description?: string;
-    continent?: ContinentEnum[];
+    continent: ContinentEnum[];
 
     conservationStatus: ConservationStatus;
     reasonOfEndangerment: string;
@@ -43,7 +43,7 @@ export class Species{
         this.images = species?.images ?? []
         this.alive = species?.alive ?? []
         this.posts = species?.posts
-        this.continent = species?.continent
+        this.continent = species?.continent ?? []
         this.conservationStatus = species?.conservationStatus ?? ConservationStatus.Conservation_Dependent
         this.biome = species?.biome ?? Biome.Grassland
 

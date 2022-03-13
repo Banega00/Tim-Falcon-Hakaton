@@ -1,3 +1,4 @@
+import { Organization } from './Organization.entity';
 import { AnimalProfile } from './AnimalProfile.entity';
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Post } from "./Post.entity";
@@ -55,13 +56,16 @@ export class Species{
     @Column({nullable: true})
     description?: string;
 
-    @Column({
+    @Column(
+        'simple-array',
+        {
         nullable: true,
-        default: ContinentEnum.EUROPE
+        default: null
     })
     continent?: ContinentEnum[];
 
-    @Column({
+    @Column(
+        {
         nullable: true,
         default: ConservationStatus.Endangered
     })
@@ -74,6 +78,10 @@ export class Species{
     @OneToMany(() => AnimalProfile, animalProfile => animalProfile.species)
     @JoinTable()
     animalProfiles?:AnimalProfile[] | undefined;
+
+    @ManyToMany(() => Organization)
+    @JoinTable() 
+    organizations?:Organization[] | undefined;
 
     @Column(
         'simple-array',

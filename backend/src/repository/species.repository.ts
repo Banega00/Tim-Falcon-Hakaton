@@ -6,7 +6,7 @@ export class _SpeciesRepository{
     public async getAll(entityManager?: EntityManager) {
         const manager = entityManager || getManager();
         let species;
-        species = await manager.find(Species, {relations:['animalProfiles', 'posts']})
+        species = await manager.find(Species, {relations:['animalProfiles', 'posts', 'organizations']})
        species.forEach(element => {
            element.alive = JSON.parse(element.alive)
            element.geoData = JSON.parse(element.geoData)
@@ -33,13 +33,11 @@ export class _SpeciesRepository{
     public async findById(speciesId: number, entityManager?: EntityManager): Promise<Species|undefined>{
         const manager = entityManager || getManager();
         let species;
-        species = await manager.findOne(Species, speciesId, {relations:['animalProfiles', 'posts']})
+        species = await manager.findOne(Species, speciesId, {relations:['animalProfiles', 'posts', 'organizations']})
         species.alive = JSON.parse(species.alive)
         species.geoData = JSON.parse(species.geoData)
-        species.images.forEach(element => {
-            element = JSON.parse(element.images)
-           });        
-           return species
+           
+        return species
     }
 
     // public async findByEmail(email: string, entityManager?: EntityManager): Promise<Species|undefined>{

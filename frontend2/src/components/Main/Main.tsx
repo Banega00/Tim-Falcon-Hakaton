@@ -3,6 +3,9 @@ import styles from "./Main.module.scss";
 import cloudImg from '../../images/pngwing.com.png';
 import falconImg from '../../images/kindpng_1184549-removebg.png';
 import CountUp from "react-countup";
+import BgImage from '../../images/pexels-munkee-panic-1027393.jpg';
+import { Parallax } from "react-parallax";
+
 import { HttpService } from "../../utils/HttpService";
 const Main = () => {
   

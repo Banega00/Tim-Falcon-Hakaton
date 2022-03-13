@@ -12,6 +12,7 @@ import { SpeciesPage } from "./components/SpeciesPage/SpeciesPage";
 import EndangeredSpecies from "./components/EndangeredSpecies/EndangeredSpecies";
 import "./App.css";
 import Header from "./components/Header/Header";
+import QuotePage from "./components/QuotePage/QuotePage";
 
 //Route Guard component
 const RequireAuth: React.FC<any> = ({ children }) => {
@@ -38,6 +39,7 @@ export default function App() {
           <Route path={'/'} element={
             <>
               <Main/>
+              <QuotePage/>
             </>}/>
           <Route path="/login" element={<Login />} />
           <Route path="/species/:id" element={

@@ -39,7 +39,6 @@ export default function App() {
         <Routes>
           <Route path={'/'} element={
             <>
-              <Header isMain={true}/>
               <Main/>
               <QuotePage/>
               <PlanetEarth/>

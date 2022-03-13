@@ -77,6 +77,31 @@
   }
 }
 
+a:hover {
+  cursor: pointer;
+}
+
+.subProfile {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  color: white;
+  background: whitesmoke;
+  border-radius: 5px;
+
+  a {
+    color: var(--darkJungleGreen) !important;
+    font-size: 0.9rem !important;
+    padding: 5px;
+    border-radius: 5px;
+    //border: 1px solid var(--lightGray);
+  }
+}
+
+.logoutBtn {
+  background: var(--red);
+}
+
 @media screen and (max-width: 700px) {
   .headerContainer {
     .menu {

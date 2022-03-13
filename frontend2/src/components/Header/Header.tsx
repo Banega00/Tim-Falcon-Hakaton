@@ -24,14 +24,14 @@ const Header = ({ isMain }) => {
       });
   }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     const user = getUser();
-    if(!user) return;
+    if (!user) return;
     HttpService.getUserData(user.id)
-    .then(axiosResponse =>{
-      setUserData(axiosResponse.data.payload)
-    }).catch(console.log);
-  },[])
+      .then(axiosResponse => {
+        setUserData(axiosResponse.data.payload)
+      }).catch(console.log);
+  }, [])
 
   const { authed, logout } = useAuth();
   const navigate = useNavigate();
@@ -66,9 +66,9 @@ const Header = ({ isMain }) => {
       setMenu(true);
   }
 
-  const[toggleProfile, setToggleProfile] = useState(false);
-  const[toggleMySpecies, setToggleMySpecies] = useState(false);
-  const[toggleMyAnimals, setToggleMyAnimals] = useState(false);
+  const [toggleProfile, setToggleProfile] = useState(false);
+  const [toggleMySpecies, setToggleMySpecies] = useState(false);
+  const [toggleMyAnimals, setToggleMyAnimals] = useState(false);
 
   return (
     <div className={scroll ? styles.headerContainer + " " + styles.scroll : styles.headerContainer}>
@@ -114,8 +114,9 @@ const Header = ({ isMain }) => {
                   setToggleMySpecies(true)
               }}>My Species {toggleMySpecies ? <span>▼</span> : <span>▲</span>}</a>
               <div className={toggleMySpecies ? styles.subProfile + " " + styles.subNotProfile + " " + styles.active : styles.subProfile + " " + styles.subNotProfile}>
-                <a>Penguin</a>
-                <a>Rhino</a>
+                {userData && userData.animalProfiles && userData.animalProfiles.map(animalProfile => {
+                  return <a href={`/animal/${animalProfile.id}`}>{animalProfile.species?.name + " - " + animalProfile.name}</a>
+                })}
               </div>
               {/*{toggleMySpecies ?*/}
               {/*  <div className={styles.subProfile + " " + styles.subNotProfile}>*/}
@@ -131,8 +132,8 @@ const Header = ({ isMain }) => {
                   setToggleMyAnimals(true)
               }}>My Animals {toggleMyAnimals ? <span>▼</span> : <span>▲</span>}</a>
               <div className={toggleMyAnimals ? styles.subProfile + " " + styles.subNotProfile + " " + styles.active : styles.subProfile + " " + styles.subNotProfile}>
-                {userData && userData.animalProfiles && userData.animalProfiles.map(animalProfile=>{
-                  return <a href={`/animal/${animalProfile.id}`}>{animalProfile.species?.name +" - " + animalProfile.name}</a>
+                {userData && userData.animalProfiles && userData.animalProfiles.map(animalProfile => {
+                  return <a href={`/animal/${animalProfile.id}`}>{animalProfile.species?.name + " - " + animalProfile.name}</a>
                 })}
               </div>
             </li>

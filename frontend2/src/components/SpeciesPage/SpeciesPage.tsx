@@ -68,7 +68,7 @@ export const SpeciesPage: React.FC<any> = () => {
           <div>
             {speciesData && <div className={styles.sName}><p>{speciesData.name}</p></div>}
             <div className={isUserAlreadyFollow() ? styles.followBtn + " " + styles.alreadyFollow : styles.followBtn}>
-              {<FaHeart onClick={followSpecies} />}
+              {<FaHeart className={styles.heart} onClick={followSpecies} />}
             </div>
           </div>
           {/* <div className={styles.mainImg} src="/src/images/beloglavi-sup-2.jpg"/> */}

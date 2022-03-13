@@ -1,17 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from "./EndangeredSpecies.module.scss";
 import EndangeredSpeciesCard from '../EndangeredSpeciesCard/EndangeredSpeciesCard';
-import Sheep from '../../images/barbary-sheep.png';
-import Leopard from '../../images/jaguar.png';
-import Rhino from '../../images/rhino.png';
-import Snail from '../../images/snail.png';
-import Kakapo from '../../images/parrot.png';
-import Albatros from '../../images/crane.png';
-import Vaquita from '../../images/dolphin.png'
-import { Biome, ConservationStatus, ContinentEnum } from '../../models/Enums';
-import { Species } from '../../models/Species.entity';
-import { HttpService } from '../../utils/HttpService';
-import {  useParams } from 'react-router-dom';
+import {Biome, ConservationStatus, ContinentEnum} from '../../models/Enums';
+import {Species} from '../../models/Species.entity';
+import {HttpService} from '../../utils/HttpService';
+import {useParams} from 'react-router-dom';
 
 export const arraySum = (array) =>{
     let sum = 0;
@@ -164,7 +157,8 @@ const EndangeredSpecies = () => {
                 {conservationStatus && <div>{statusesArray[statusesArray.length-conservationStatus]}</div>}
             </div>
             <div className={styles.cards}>
-                {filteredSpeciesArray && filteredSpeciesArray.map(species => <EndangeredSpeciesCard id={species.id} img={ species.images[0] } text={species.name} total={arraySum(species.alive)} remaining= {species.alive} continent={species.continent}/>)}
+                {filteredSpeciesArray && filteredSpeciesArray.map(species => <EndangeredSpeciesCard id={species.id} img={ species.images[0] } text={species.name} total={arraySum(species.alive)} remaining= {species.alive} continent={species.continent} badgeText={species.conservationStatus.toString()}
+                />)}
                 
                 {/* <EndangeredSpeciesCard img={ Leopard } text="Amur Leopard" left= "70" habitat="Asia"/>
                 <EndangeredSpeciesCard img={ Rhino } text="White Rhino" left= "2" habitat="Africa"/>

@@ -93,7 +93,7 @@ export const configurePassport = (app: Application, passport: PassportStatic) =>
   //FOR GOOGLE OAUTH2 STRATEGY
   app.get('/google-oauth-cb', passport.authenticate('google', {
     failureRedirect: '/failure',
-    successRedirect: 'http://localhost:3001/successGoogleLogin'
+    successRedirect: 'http://192.168.43.189:3001/successGoogleLogin'
   }),
   )
 

@@ -1,4 +1,4 @@
-import { Species } from './Species.entity';
+import { GeoData, Species } from './Species.entity';
 
 export class AnimalProfile{
     id: number | undefined;
@@ -9,6 +9,8 @@ export class AnimalProfile{
 
     species?:Species | undefined;
     images?: string[] | undefined;
+    location?: string;
+    geoData?: GeoData[] | undefined;
 
     constructor(animalProfile?: Partial<AnimalProfile>) {
         animalProfile?.id && (this.id = animalProfile.id)

@@ -17,8 +17,7 @@ export const Login = () => {
     const password = passwordInput.current?.value
     login(email!, password!).then((response: ResponseModel) => {
       
-      localStorage.setItem('user', JSON.stringify({ name: 'pera' }))
-      navigate((state as any)?.path || "/home");
+      navigate((state as any)?.path || "/");
     }).catch((error: ResponseModel) => {
       setServerResponse(error);
     });
@@ -32,7 +31,7 @@ export const Login = () => {
       timer = setInterval(() =>{
         if(childWindow.closed){
           if(timer) clearInterval(timer)
-          navigate("/home")
+          navigate("/")
         }
       }, 500)
     }

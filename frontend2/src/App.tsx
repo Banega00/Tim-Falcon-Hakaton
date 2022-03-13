@@ -13,6 +13,10 @@ import EndangeredSpecies from "./components/EndangeredSpecies/EndangeredSpecies"
 import "./App.css";
 import Header from "./components/Header/Header";
 import QuotePage from "./components/QuotePage/QuotePage";
+import PlanetEarth from "./components/PlanetEarth/PlanetEarth";
+import {AnimalProfile} from "./models/AnimalProfile.entity";
+import AnimalProfileCard from "./components/AnimalProfileCard/AnimalProfileCard";
+import ProfileAnimal from "./components/ProfileAnimal/ProfileAnimal";
 
 //Route Guard component
 const RequireAuth: React.FC<any> = ({ children }) => {
@@ -40,6 +44,7 @@ export default function App() {
             <>
               <Main/>
               <QuotePage/>
+              <PlanetEarth/>
             </>}/>
           <Route path="/login" element={<Login />} />
           <Route path="/species/:id" element={
@@ -66,6 +71,14 @@ export default function App() {
                 <Navbar />
                 <Profile />
               </RequireAuth>
+            }
+          />
+          <Route
+            path="/animal/:id"
+            element={
+              <>
+                <ProfileAnimal/>
+              </>
             }
           />
 

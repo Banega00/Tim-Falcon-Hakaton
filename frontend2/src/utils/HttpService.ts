@@ -35,6 +35,9 @@ class _HttpService{
     public async getAllSpecies() {
         return await this.axiosInstance.get(`/species`);
     }
+    getAnimalData = async (id:string) => {
+        return await this.axiosInstance.get(`/animalProfile/${id}`);
+    }
 }
 
 export const HttpService = new _HttpService();

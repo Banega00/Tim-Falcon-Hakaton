@@ -1,0 +1,48 @@
+h1 {
+  margin: 5px;
+}
+
+p {
+  margin: 5px;
+}
+
+.carousel {
+  img {
+    max-height: 400px;
+  }
+}
+
+.chatIcon {
+  position: fixed;
+  bottom: 50px;
+  right: 30px;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  background: red;
+}
+
+.overlay {
+  display: none;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background: gray;
+  filter: brightness(50%);
+}
+
+.chatBotContainer {
+  display: none;
+  position: fixed;
+  top: 300px;
+  width: 90%;
+  max-width: 300px;
+  height: 500px;
+  background: white;
+  border-radius: 16px;
+  z-index: 1;
+
+  &.active {
+    display: block;
+  }
+}

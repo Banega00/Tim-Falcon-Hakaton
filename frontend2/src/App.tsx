@@ -74,7 +74,7 @@ export default function App() {
             }
           />
           <Route
-            path="/animal:id"
+            path="/animal/:id"
             element={
               <>
                 <ProfileAnimal/>

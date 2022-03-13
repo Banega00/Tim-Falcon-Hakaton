@@ -8,7 +8,7 @@ export class AnimalProfile{
     monthsOld: number;
 
     species?:Species | undefined;
-    images?: string[] | undefined;
+    images: string[];
     location?: string;
     geoData?: GeoData[] | undefined;
 
@@ -16,6 +16,6 @@ export class AnimalProfile{
         animalProfile?.id && (this.id = animalProfile.id)
         this.name = animalProfile?.name ?? '' 
         this.monthsOld = animalProfile?.monthsOld ?? 0 
-        this.images = animalProfile?.images; 
+        this.images = animalProfile?.images ?? []
     }
 }

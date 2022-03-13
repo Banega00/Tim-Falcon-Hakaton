@@ -1,3 +1,59 @@
-.main{
-    padding-top: 300px;
+.main {
+    font-family: "Poppins";
+    max-width: 300px !important;
+    width: 90% !important;
+    padding: 30px !important;
+    h1 {
+        margin: 0;
+        margin-bottom: 10px;
+    }
+    label {
+        display: flex;
+        flex-direction: column;
+        margin: 5px;
+        input {
+            border: none;
+            padding: 10px;
+            width: 90%;
+            max-width: 200px;
+            border-radius: 16px;
+        }
+    }
+    button {
+        border: none;
+        border-radius: 16px;
+        padding: 10px;
+        margin: 5px;
+        min-width: 160px;
+
+        background-size: 200%;
+        transition: 0.3s ease-out;
+    }
+    .loginBtn {
+        //background: var(--blue);
+        color: white;
+        margin-top: 20px;
+
+        background: linear-gradient(to left, var(--blue) 50%, var(--darkBlue) 50%) right;
+        background-size: 200%;
+        transition: 0.3s ease-out;
+
+        &:hover {
+            cursor: pointer;
+            background-position: left;
+        }
+    }
+    .signinBtn {
+        //background: var(--red);
+        color: white;
+
+        background: linear-gradient(to left, var(--darkGreen) 50%, var(--darkerGreen) 50%) right;
+        background-size: 200%;
+        transition: 0.3s ease-out;
+
+        &:hover {
+            cursor: pointer;
+            background-position: left;
+        }
+    }
 }

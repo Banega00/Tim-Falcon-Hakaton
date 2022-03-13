@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Main.module.scss";
 import cloudImg from '../../images/pngwing.com.png';
 import falconImg from '../../images/kindpng_1184549-removebg.png';
@@ -6,7 +6,10 @@ import CountUp from "react-countup";
 import BgImage from '../../images/pexels-munkee-panic-1027393.jpg';
 import { Parallax } from "react-parallax";
 
+import { HttpService } from "../../utils/HttpService";
 const Main = () => {
+  
+
   return (
     <div className={styles.main}>
       <div className={styles.title}>
@@ -17,13 +20,16 @@ const Main = () => {
           <span>R</span>
           <span>Y</span>
         </h1>
-      </div>
         <p></p>
-    <div className={styles.falconimg}>
+      </div>
+      <div className={styles.falconimg}>
         <img src={falconImg} />
-      </div><div className={styles.cloudimg}>
+      </div>
+      <div className={styles.cloudimg}>
         <img src={cloudImg} />
-      </div><div className={styles.info}>
+      </div>
+
+      <div className={styles.info}>
         <div className={styles.row}>
           <div className={styles.card}>
             <p>Endangered spicies</p>

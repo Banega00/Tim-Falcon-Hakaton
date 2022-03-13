@@ -25,7 +25,7 @@ export const SpeciesPage: React.FC<any> = () => {
   useEffect(()=>{
     if(id && +id){
       HttpService.getSpeciesData(id)
-      .then(axiosResponse =>{
+      .then(axiosResponse => {
         const response:ResponseModel = axiosResponse.data;
         setSpeciesData(response.payload)
       })

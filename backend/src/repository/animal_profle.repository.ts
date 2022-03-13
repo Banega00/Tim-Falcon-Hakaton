@@ -7,8 +7,10 @@ export class _AnimalProfileRepository{
         const manager = entityManager || getManager();
 
         let animalProfile;
-        animalProfile = manager.find(AnimalProfile)
-        animalProfile.geoData.map(element=>JSON.parse(element)) 
+        animalProfile = await manager.find(AnimalProfile)
+        animalProfile.forEach(element => {
+            element.geoData = JSON.parse(element.geoData)
+        }); 
         return animalProfile
         
     }

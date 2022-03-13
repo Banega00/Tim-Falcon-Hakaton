@@ -5,7 +5,7 @@ export class _UserRepository{
 
     public async getAll(entityManager?: EntityManager) {
         const manager = entityManager || getManager();
-        return manager.find(User)
+        return manager.find(User,{relations: ['species', 'animalProfiles', 'organizations','posts']})
     }
     
     public async deleteById(id: string, entityManager?: EntityManager) {
@@ -23,7 +23,7 @@ export class _UserRepository{
 
     public async findById(userId: string, entityManager?: EntityManager): Promise<User|undefined>{
         const manager = entityManager || getManager();
-        return await manager.findOne(User, userId)
+        return await manager.findOne(User, userId,{relations: ['species', 'animalProfiles', 'organizations','posts']})
     }
 
     public async findByEmail(email: string, entityManager?: EntityManager): Promise<User|undefined>{

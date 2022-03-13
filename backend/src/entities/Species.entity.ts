@@ -20,8 +20,6 @@ export enum Biome {
     Forest = 'Forest',
     Desert = 'Desert',
     Tundra = 'Tundra'
-
-
 }
 export enum ConservationStatus {
     Extinct = 'Extinct',
@@ -61,7 +59,7 @@ export class Species{
         nullable: true,
         default: ContinentEnum.EUROPE
     })
-    continent: ContinentEnum;
+    continent?: ContinentEnum[];
 
     @Column({
         nullable: true,
@@ -110,7 +108,7 @@ export class Species{
         this.description = species?.description ?? '' 
         this.animalProfiles = species?.animalProfiles
         this.posts = species?.posts
-        this.continent = species?.continent ?? ContinentEnum.EUROPE
+        this.continent = species?.continent
         this.conservationStatus = species?.conservationStatus ?? ConservationStatus.Conservation_Dependent
         this.biome = species?.biome ?? Biome.Grassland
 

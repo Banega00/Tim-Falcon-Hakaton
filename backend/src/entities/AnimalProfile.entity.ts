@@ -19,6 +19,9 @@ export class AnimalProfile{
     @Column({nullable: true})
     location?: string;
 
+    @Column({nullable: true})
+    food?: string;
+
     @Column(
         'simple-array',
         {

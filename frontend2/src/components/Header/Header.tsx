@@ -3,8 +3,20 @@ import styles from "./Header.module.scss";
 import logoImg from '../../images/falcon-logo-1.png';
 import menuIcon from '../../images/menu.png';
 import closeIcon from '../../images/close.png';
+import { delete_cookie, useAuth } from "../../utils/Auth";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ isMain }) => {
+
+  const { authed, logout } = useAuth();
+    const navigate = useNavigate();
+
+    const handleLogOut = () =>{
+        logout();
+        delete_cookie('connect.sid')
+        localStorage.removeItem('user');
+        navigate('/')
+    }
 
   const [scroll, setScroll] = useState(!isMain);
 
@@ -63,22 +75,23 @@ const Header = ({ isMain }) => {
         <li>
           <a href={'#'}>Contact</a>
         </li>
-        {localStorage.getItem('user') == '' ?
-          <li>
-            <a href={'/login'}>Log in</a>
-          </li> :
+        {console.log(localStorage.getItem('user'))}
+        {localStorage.getItem('user') ?
           <>
           <li>
-            <a href={'/logout'}>Log out</a>
+            <a href={'/logout'}>My Species</a>
           </li>
           <li>
             <a href={'/logout'}>My Animals</a>
           </li>
           <li>
-            <a href={'/logout'}>My Species</a>
+            <a onClick={handleLogOut}>Log out</a>
           </li>
           </>
-          
+          :
+          <li>
+            <a href={'/login'}>Log in</a>
+          </li>
         }
 
 

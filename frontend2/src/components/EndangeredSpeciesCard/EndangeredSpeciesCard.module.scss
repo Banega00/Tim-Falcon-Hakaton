@@ -60,10 +60,12 @@
 .container .card:hover .imgBx{
   top: 0%;
   transform: translateY(0%);
-    
+  z-index: 1;
+
 }
 
 .container .card .imgBx img{
+  z-index: 1;
   position: absolute;
   top: 50%;
   left: 50%;

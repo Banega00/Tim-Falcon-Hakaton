@@ -5,17 +5,7 @@ import falconImg from '../../images/kindpng_1184549-removebg.png';
 import CountUp from "react-countup";
 import { HttpService } from "../../utils/HttpService";
 const Main = () => {
-  const [aut, setAut] = useState<boolean>(false);
-  useEffect(() => {
-    HttpService.checkAuth()
-      .then(response => {
-        localStorage.setItem("user", JSON.stringify(response.data.payload.user))
-        setAut(true)
-      })
-      .catch(responst => {
-        setAut(false)
-      });
-  }, [])
+  
 
   return (
     <div className={styles.main}>

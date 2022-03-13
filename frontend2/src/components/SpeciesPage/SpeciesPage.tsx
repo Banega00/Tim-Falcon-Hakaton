@@ -6,7 +6,7 @@ import slika from '../../images/beloglavi-sup-2.jpg'
 import { flipCoordinatesArray } from '../../utils/util-functions';
 import { useParams } from 'react-router-dom';
 import { HttpService } from '../../utils/HttpService';
-import { GeoData, Species } from '../../models/Species.entity';
+import { Species } from '../../models/Species.entity';
 import { ResponseModel } from '../../models/ResponseModel';
 
 export const colorBasedOnNumber = (num:number | undefined)=>{
@@ -20,14 +20,12 @@ export const colorBasedOnNumber = (num:number | undefined)=>{
 export const SpeciesPage: React.FC<any> = () => {
   let { id } = useParams();
   const [speciesData, setSpeciesData] = useState<Species | undefined>(undefined);
-  const [geoData, setGeoData] = useState<GeoData[][] | undefined>(undefined);
   useEffect(()=>{
     if(id && +id){
       HttpService.getSpeciesData(id)
       .then(axiosResponse =>{
         const response:ResponseModel = axiosResponse.data;
         setSpeciesData(response.payload)
-        setGeoData(JSON.parse(response.payload.geoData))
       })
     }
   },[])
@@ -50,7 +48,7 @@ export const SpeciesPage: React.FC<any> = () => {
             A pretty CSS3 popup. <br /> Easily customizable.
           </Popup>
         </Marker>
-        {geoData && speciesData?.alive && geoData.map((polygon, index) => <Polygon pathOptions={{ color: 'black', fillColor: colorBasedOnNumber(speciesData?.alive[index]), weight: 1, fillOpacity:0.5 }} positions={flipCoordinatesArray(polygon)} />)})
+        {speciesData?.geoData && speciesData?.alive && speciesData.geoData.map((polygon, index) => <Polygon pathOptions={{ color: 'black', fillColor: colorBasedOnNumber(speciesData?.alive[index]), weight: 1, fillOpacity:0.5 }} positions={flipCoordinatesArray(polygon)} />)})
       </MapContainer>
 
       <div>

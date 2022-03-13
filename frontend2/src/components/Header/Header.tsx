@@ -26,6 +26,7 @@ const Header = ({ isMain }) => {
 
   useEffect(()=>{
     const user = getUser();
+    if(!user) return;
     HttpService.getUserData(user.id)
     .then(axiosResponse =>{
       setUserData(axiosResponse.data.payload)
@@ -112,11 +113,15 @@ const Header = ({ isMain }) => {
                 else
                   setToggleMySpecies(true)
               }}>My Species {toggleMySpecies ? <span>▼</span> : <span>▲</span>}</a>
-              {toggleMySpecies ?
-                <div className={styles.subProfile + " " + styles.subNotProfile}>
-                  <a>Penguin</a>
-                  <a>Rhino</a>
-                </div> : <></>}
+              <div className={toggleMySpecies ? styles.subProfile + " " + styles.subNotProfile + " " + styles.active : styles.subProfile + " " + styles.subNotProfile}>
+                <a>Penguin</a>
+                <a>Rhino</a>
+              </div>
+              {/*{toggleMySpecies ?*/}
+              {/*  <div className={styles.subProfile + " " + styles.subNotProfile}>*/}
+              {/*    <a>Penguin</a>*/}
+              {/*    <a>Rhino</a>*/}
+              {/*  </div> : <></>}*/}
             </li>
             <li>
               <a onClick={() => {
@@ -125,11 +130,11 @@ const Header = ({ isMain }) => {
                 else
                   setToggleMyAnimals(true)
               }}>My Animals {toggleMyAnimals ? <span>▼</span> : <span>▲</span>}</a>
-              {toggleMyAnimals ?
-                <div className={styles.subProfile + " " + styles.subNotProfile}>
-                  {userData && userData.animalProfiles && userData.animalProfiles.map(animal=>
-                    <a href={`/animal/${animal.id}`}><span>{animal.species?.name}</span> {animal.name}</a>)}
-                </div> : <></>}
+              <div className={toggleMyAnimals ? styles.subProfile + " " + styles.subNotProfile + " " + styles.active : styles.subProfile + " " + styles.subNotProfile}>
+                {userData && userData.animalProfiles && userData.animalProfiles.map(animalProfile=>{
+                  return <a href={`/animal/${animalProfile.id}`}>{animalProfile.species?.name +" - " + animalProfile.name}</a>
+                })}
+              </div>
             </li>
             <li>
               {/*<a onClick={handleLogOut}>Profile</a>*/}
@@ -139,13 +144,18 @@ const Header = ({ isMain }) => {
                 else
                   setToggleProfile(true)
               }}>Profile {toggleProfile ? <span>▼</span> : <span>▲</span>}</a>
-              {toggleProfile ?
-                <div className={styles.subProfile}>
-                  <a>{JSON.parse(localStorage.getItem('user')!).email}</a>
-                  <a>{JSON.parse(localStorage.getItem('user')!).name}</a>
-                  <a className={styles.logoutBtn} onClick={handleLogOut}>Logout</a>
-                </div> : <></>
-              }
+              <div className={toggleProfile ? styles.subProfile + " " + styles.active : styles.subProfile}>
+                <a>{JSON.parse(localStorage.getItem('user')!).email}</a>
+                <a>{JSON.parse(localStorage.getItem('user')!).name}</a>
+                <a className={styles.logoutBtn} onClick={handleLogOut}>Logout</a>
+              </div>
+              {/*{toggleProfile ?*/}
+              {/*  <div className={styles.subProfile}>*/}
+              {/*    <a>{JSON.parse(localStorage.getItem('user')!).email}</a>*/}
+              {/*    <a>{JSON.parse(localStorage.getItem('user')!).name}</a>*/}
+              {/*    <a className={styles.logoutBtn} onClick={handleLogOut}>Logout</a>*/}
+              {/*  </div> : <></>*/}
+              {/*}*/}
             </li>
           </>
           :

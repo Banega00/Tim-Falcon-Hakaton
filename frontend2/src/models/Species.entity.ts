@@ -40,6 +40,7 @@ export class Species{
         this.users = species?.users ?? []
         this.reasonOfEndangerment = species?.reasonOfEndangerment ?? ''
         this.howToHelp = species?.howToHelp ?? '' 
+        
         // this.dead = species?.dead ?? 0
         this.description = species?.description ?? '' 
         this.animalProfiles = species?.animalProfiles

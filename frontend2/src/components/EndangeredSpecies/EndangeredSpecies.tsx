@@ -26,15 +26,8 @@ const EndangeredSpecies = () => {
     const [selectedHabitats, setSelectedHabitats] = useState<Biome[]>([])
     const [selectedContinents, setSelectedContinents] = useState<ContinentEnum[]>([])
     const [conservationStatus, setConservationStatus] = useState<number>(0);
-    
-    if(idNumber){
-        if(!selectedContinents || selectedContinents.length==0){
-            setSelectedContinents([Object.values(ContinentEnum)[idNumber-1]])
-        }
-    }
 
     const filteredSpecies = () =>{
-        console.log("FILTRIRAM")
         setFilteredSpeciesArray(speciesArray.filter(species => {
             if(selectedHabitats && selectedHabitats.length >0 && !selectedHabitats.includes(species.biome))return false;
             if(!species.continent) return false;
@@ -43,6 +36,15 @@ const EndangeredSpecies = () => {
             return true
         }))
     }
+    
+    if(idNumber){
+        if(!selectedContinents || selectedContinents.length==0){
+            setSelectedContinents([Object.values(ContinentEnum)[idNumber-1]])
+            filteredSpecies()
+        }
+    }
+
+    
 
     useEffect(filteredSpecies,[selectedContinents, selectedHabitats, conservationStatus])
 

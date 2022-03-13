@@ -74,7 +74,7 @@ const ProfileAnimal = () => {
         break;
       case "What do you eat?":
         oldChats.push(<div className={styles.myQuestion}>{message}</div>);
-        oldChats.push(<div className={styles.botResponse}>I eat food.</div>);
+        oldChats.push(<div className={styles.botResponse}>I eat {animalData.food}</div>);
         setChats(oldChats);
         break;
     }
@@ -123,10 +123,10 @@ const ProfileAnimal = () => {
       </a>
       <div className={chatBot ? styles.chatBotContainer + " " + styles.active : styles.chatBotContainer}>
         <div className={styles.myMessageSelector}>
-          <button onClick={() => sendMessage("Hello!")}>Hello!</button>
-          <button onClick={() => sendMessage("How old are you?")}>How old are you?</button>
-          <button onClick={() => sendMessage("Where are you from?")}>Where are you from?</button>
-          <button onClick={() => sendMessage("What do you eat?")}>What do you eat?</button>
+          <button style={{fontSize:'1.2rem', padding:'7px'}} onClick={() => sendMessage("Hello!")}>Hello!</button>
+          <button style={{fontSize:'1.2rem', padding:'7px'}} onClick={() => sendMessage("How old are you?")}>How old are you?</button>
+          <button style={{fontSize:'1.2rem', padding:'7px'}} onClick={() => sendMessage("Where are you from?")}>Where are you from?</button>
+          <button style={{fontSize:'1.2rem', padding:'7px'}} onClick={() => sendMessage("What do you eat?")}>What do you eat?</button>
           {chats}
         </div>
       </div>

@@ -13,6 +13,7 @@ import EndangeredSpecies from "./components/EndangeredSpecies/EndangeredSpecies"
 import "./App.css";
 import Header from "./components/Header/Header";
 import QuotePage from "./components/QuotePage/QuotePage";
+import PlanetEarth from "./components/PlanetEarth/PlanetEarth";
 
 //Route Guard component
 const RequireAuth: React.FC<any> = ({ children }) => {
@@ -41,6 +42,7 @@ export default function App() {
               <Header isMain={true}/>
               <Main/>
               <QuotePage/>
+              <PlanetEarth/>
             </>}/>
           <Route path="/login" element={<Login />} />
           <Route path="/species/:id" element={

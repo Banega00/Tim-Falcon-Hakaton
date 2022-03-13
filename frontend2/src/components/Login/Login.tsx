@@ -4,6 +4,7 @@ import { useAuth } from "../../utils/Auth";
 import { ResponseModel } from "../../models/ResponseModel";
 import styles from './Login.module.scss'
 import styles1 from '../SpeciesPage/SpeciesPage.module.scss';
+import { HttpService } from "../../utils/HttpService";
 
 export const Login = () => {
   const emailInput = useRef<HTMLInputElement>(null);
@@ -17,22 +18,34 @@ export const Login = () => {
     const email = emailInput.current?.value
     const password = passwordInput.current?.value
     login(email!, password!).then((response: ResponseModel) => {
-      
-      navigate((state as any)?.path || "/");
+      HttpService.checkAuth()
+        .then(response => {
+          localStorage.setItem("user", JSON.stringify(response.data.payload.user))
+          navigate(-1);
+        })
+        .catch(responst => {
+        });
     }).catch((error: ResponseModel) => {
       setServerResponse(error);
     });
   };
 
   const handleGoogleLogin = () => {
-    const childWindow = window.open('http://192.168.43.189:3000/login/google', "mywindow", "location=1,status=1,scrollbars=1, width=800,height=800");
-    
+    const childWindow = window.open('http://localhost:3000/login/google', "mywindow", "location=1,status=1,scrollbars=1, width=800,height=800");
+
     let timer: NodeJS.Timeout | null = null;
-    if(childWindow){
-      timer = setInterval(() =>{
-        if(childWindow.closed){
-          if(timer) clearInterval(timer)
-          navigate("/")
+    if (childWindow) {
+      timer = setInterval(() => {
+        if (childWindow.closed) {
+          if (timer) clearInterval(timer)
+          HttpService.checkAuth()
+            .then(response => {
+              localStorage.setItem("user", JSON.stringify(response.data.payload.user))
+              navigate((state as any)?.path || "/");
+            })
+            .catch(responst => {
+            });
+            navigate(-1);
         }
       }, 500)
     }

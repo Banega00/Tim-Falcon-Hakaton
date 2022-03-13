@@ -11,7 +11,7 @@ import { User } from '../entities/User.entity';
 
 declare module 'express-session' {
   export interface SessionData {
-    passport: User
+    passport: {user: User }
   }
 }
 
@@ -143,6 +143,7 @@ export const configurePassport = (app: Application, passport: PassportStatic) =>
 }
 
 export const checkAuthenticated = (request: Request, response: Response, next: NextFunction) => {
+  console.log("AUTH:")
   if (request.isAuthenticated()) { 
     return next();
   }

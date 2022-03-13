@@ -31,8 +31,8 @@ export class _AnimalProfileRepository{
     public async findById(animalProfileId: number, entityManager?: EntityManager): Promise<AnimalProfile|undefined>{
         const manager = entityManager || getManager();
         let animalProfile;
-        animalProfile = await manager.findOne(AnimalProfile, animalProfileId,{relations: ['species', 'images', 'geoData']})
-        animalProfile.geoData = JSON.parse(animalProfile?.geoData)
+        animalProfile = await manager.findOne(AnimalProfile, animalProfileId,{relations: ['species']})
+        animalProfile?.geoData && (animalProfile.geoData = JSON.parse(animalProfile?.geoData))
         return animalProfile
     }
 

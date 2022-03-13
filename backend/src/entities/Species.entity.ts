@@ -2,6 +2,7 @@ import { Organization } from './Organization.entity';
 import { AnimalProfile } from './AnimalProfile.entity';
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { Post } from "./Post.entity";
+import { User } from './User.entity';
 
 export type GeoData = [number, number]
 
@@ -10,7 +11,7 @@ export enum ContinentEnum  {
     ASIA = 'Asia',
     AFRICA = 'Africa',
     NORTH_AMERICA = 'North America',
-    SOUTH_AMERICA = 'North America',
+    SOUTH_AMERICA = 'South America',
     AUSTRAILA = 'Australia',
     ANTARTICA = 'Antartica'
 
@@ -87,6 +88,10 @@ export class Species{
     @ManyToMany(() => Organization)
     @JoinTable() 
     organizations?:Organization[] | undefined;
+
+    @ManyToMany(() => User)
+    @JoinTable() 
+    users?: User[] | undefined;
 
     @Column(
         'simple-array',

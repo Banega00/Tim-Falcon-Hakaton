@@ -88,10 +88,10 @@ const Header = ({ isMain }) => {
           <a href={'/#'}>Home</a>
         </li>
         <li>
-          <a href={'#'}>About</a>
+          <a href={'/endangeredspecies'}>Species</a>
         </li>
         <li>
-          <a href={'#'}>Contact</a>
+          <a href={'/'}>Contact</a>
         </li>
         {localStorage.getItem('user') ?
           <>

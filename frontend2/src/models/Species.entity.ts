@@ -2,6 +2,7 @@ import { Organization } from './Organization.entity';
 import { AnimalProfile } from './AnimalProfile.entity';
 import { Post } from "./Post.entity";
 import { Biome, ConservationStatus, ContinentEnum } from './Enums';
+import { User } from './User.entity';
 
 export type GeoData = [number, number]
 export class Species{
@@ -31,10 +32,12 @@ export class Species{
     
     biome: Biome;
     geoData?: GeoData[][] | undefined;
+    users: User[];
 
     constructor(species?: Partial<Species>) {
         species?.id && (this.id = species.id)
         this.name = species?.name ?? '' 
+        this.users = species?.users ?? []
         this.reasonOfEndangerment = species?.reasonOfEndangerment ?? ''
         this.howToHelp = species?.howToHelp ?? '' 
         // this.dead = species?.dead ?? 0

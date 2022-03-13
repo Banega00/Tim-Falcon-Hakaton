@@ -19,6 +19,7 @@ export class AnimalProfileController{
     getAnimalProfileById = async (request: Request, response: Response) =>{
         let { id } = request.params; 
         try{
+            console.log(id)
             const animalProfile = await AnimalProfileRepository.findById(+id)
             if(!animalProfile) return sendResponse(response, 404, ErrorStatusCode.PostNotFound)
             return sendResponse(response, 200, SuccessStatusCode.Success, animalProfile)

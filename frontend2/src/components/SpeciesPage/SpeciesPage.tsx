@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 import styles from './SpeciesPage.module.scss'
 import { MapContainer, TileLayer, Marker, Popup, Polygon } from 'react-leaflet'
 import slika from '../../images/falcon-logo-1.png'
-import { flipCoordinatesArray } from '../../utils/util-functions';
-import { useParams } from 'react-router-dom';
+import { flipCoordinatesArray, getUser } from '../../utils/util-functions';
+import { useNavigate, useParams } from 'react-router-dom';
 import { HttpService } from '../../utils/HttpService';
 import { Species } from '../../models/Species.entity';
 import { ResponseModel } from '../../models/ResponseModel';
-import bgImg from "../../images/bgg.jpg";
 import AnimalProfileCard from "../AnimalProfileCard/AnimalProfileCard";
+import { FaHeart } from 'react-icons/fa';
+import { arraySum } from '../EndangeredSpecies/EndangeredSpecies';
 
 export const colorBasedOnNumber = (num:number | undefined)=>{
   if(!num) return 'black'
@@ -21,6 +22,7 @@ export const colorBasedOnNumber = (num:number | undefined)=>{
 
 export const SpeciesPage: React.FC<any> = () => {
   let { id } = useParams();
+  const navigate = useNavigate();
   const [speciesData, setSpeciesData] = useState<Species | undefined>(undefined);
   useEffect(()=>{
     if(id && +id){
@@ -28,9 +30,30 @@ export const SpeciesPage: React.FC<any> = () => {
       .then(axiosResponse => {
         const response:ResponseModel = axiosResponse.data;
         setSpeciesData(response.payload)
+        setAnimals(response.payload.animalProfiles)
       })
     }
   },[])
+
+  const isUserAlreadyFollow = () =>{
+    const loggedInUser = getUser()
+    if(!loggedInUser) return false
+    const bool = speciesData?.users.some(user => user.id === loggedInUser.id)
+    return bool;
+  }
+
+  const followSpecies = (event) =>{
+    event.target.classList.add('alreadyFollow')
+    const user = getUser();
+    if(user){
+      if(isUserAlreadyFollow()) return;
+    }else{
+      navigate('/login')
+    }
+
+    speciesData && HttpService.followSpecies(speciesData.id!);
+    return true;
+  }
 
   const[animals, setAnimals] = useState([
     {pfp: slika, name: "Pera", followers: 305, age: 12},
@@ -42,15 +65,20 @@ export const SpeciesPage: React.FC<any> = () => {
     <div className={styles.container}>
       <div className={styles.main}>
         <div className={styles.firstPart}>
-          {speciesData && <div className={styles.sName}><p>{speciesData.name}</p></div>}
+          <div>
+            {speciesData && <div className={styles.sName}><p>{speciesData.name}</p></div>}
+            <div className={isUserAlreadyFollow() ? styles.followBtn + " " + styles.alreadyFollow : styles.followBtn }>
+              {<FaHeart onClick={followSpecies}/>}
+            </div>
+          </div>
           {/* <div className={styles.mainImg} src="/src/images/beloglavi-sup-2.jpg"/> */}
           {speciesData && <img className={styles.mainImg} src={require(`../../images/${speciesData?.images[0]}`)} alt="" />}
           <div className={styles.about}>
-            <span className={styles.span}>O vrsti</span>: {speciesData && speciesData.description}
+            <span className={styles.span}>About:</span>: {speciesData && speciesData.description}
           </div>
 
           <div className={styles.about}>
-            <span className={styles.span}>Broj jedinki:</span> {speciesData && speciesData.alive}
+            <span className={styles.span}>Alive:</span> {speciesData && arraySum(speciesData.alive)}
           </div>
         </div>
 
@@ -60,32 +88,24 @@ export const SpeciesPage: React.FC<any> = () => {
             url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
             maxZoom={8}
           />
-          <Marker position={[44.8125,
+          {/* <Marker position={[44.8125,
             20.4612]}>
             <Popup>
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>
-          </Marker>
+          </Marker> */}
           {speciesData?.geoData && speciesData?.alive && speciesData.geoData.map((polygon, index) => <Polygon pathOptions={{ color: 'black', fillColor: colorBasedOnNumber(speciesData?.alive[index]), weight: 1, fillOpacity:0.5 }} positions={flipCoordinatesArray(polygon)} />)})
         </MapContainer>
 
         <div className={styles.organizations}>
           <h1>Help me, save me.</h1>
+          {speciesData?.organizations?.map(organization => 
           <div className={styles.organization}>
-            <img src={slika}/>
-            <h1>Company name</h1>
-            <button>Donate here!</button>
-          </div>
-          <div className={styles.organization}>
-            <img src={slika}/>
-            <h1>Company name</h1>
-            <button>Donate here!</button>
-          </div>
-          <div className={styles.organization}>
-            <img src={slika}/>
-            <h1>Company name</h1>
-            <button>Donate here!</button>
-          </div>
+            <img src={require(`../../images/organization/${organization.logoImage}`)}/>
+            <h1>{organization.name}</h1>
+            <button><a href={organization.webSiteURL}>Donate here!</a></button>
+          </div>)}
+          
         </div>
 
         <div className={styles.organizations}>
@@ -101,3 +121,5 @@ export const SpeciesPage: React.FC<any> = () => {
     </div>
   );
 }
+
+

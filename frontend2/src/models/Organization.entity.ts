@@ -6,6 +6,10 @@ export class Organization{
 
     description: string;
 
+    webSiteURL: string;
+
+    logoImage: string;
+
     location: string;
 
     users?: User | undefined;
@@ -16,6 +20,7 @@ export class Organization{
         this.name = post?.name ?? '' 
         this.description = post?.description ?? '' 
         this.location = post?.location ?? ''
-        this.users = post?.users 
+        this.webSiteURL = post?.webSiteURL ?? ''
+        this.logoImage = post?.logoImage  ?? ''
     }
 }

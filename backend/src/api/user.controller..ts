@@ -20,18 +20,18 @@ export class UserController{
 
     followASpecies = async (request: Request, response: Response) =>{
         const { id } = request.params;
-        console.log(request.session.passport);
         
         try{
             if(!request.session.passport)return  sendResponse(response, 500, ErrorStatusCode.Failure, 'Nema usera');
-            const user = await UserRepository.findById(request.session.passport.id)
+            const user = await UserRepository.findById(request.session.passport.user.id)
             const species = await SpeciesRepository.findById(+id)
             if(!species)return  sendResponse(response, 500, ErrorStatusCode.Failure, 'Nema species');
             user?.species?.push(species)
             if(!user) return sendResponse(response, 404, ErrorStatusCode.UserNotFound)
             await UserRepository.saveUser(user)
-            console.log(user)
-            return sendResponse(response, 200, SuccessStatusCode.Success, user)
+            species.users?.push(user)
+            await SpeciesRepository.addNewSpecies(species);
+            return sendResponse(response, 200, SuccessStatusCode.Success)
         }catch(error){
             console.log(error);
             return sendResponse(response, 500, ErrorStatusCode.Failure, error);
@@ -39,16 +39,17 @@ export class UserController{
     }
     followAnAnimal = async (request: Request, response: Response) =>{
         const { id } = request.params;
-        console.log(request.session.passport);
         
         try{
             if(!request.session.passport)return  sendResponse(response, 500, ErrorStatusCode.Failure, 'Nema usera');
-            const user = await UserRepository.findById(request.session.passport.id)
+            const user = await UserRepository.findById(request.session.passport.user.id)
             const animalProfiles = await AnimalProfileRepository.findById(+id)
             if(!animalProfiles)return  sendResponse(response, 500, ErrorStatusCode.Failure, 'Nema animal');
             user?.animalProfiles?.push(animalProfiles)
             if(!user) return sendResponse(response, 404, ErrorStatusCode.UserNotFound)
             await UserRepository.saveUser(user)
+            console.log(user);
+            
             return sendResponse(response, 200, SuccessStatusCode.Success, user)
         }catch(error){
             console.log(error);

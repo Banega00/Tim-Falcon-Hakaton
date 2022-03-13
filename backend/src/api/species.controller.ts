@@ -18,7 +18,6 @@ export class SpeciesController{
 
     followASpecies = async (request: Request, response: Response) =>{
         let { id } = request.params; 
-        console.log(request.session.passport);
         try{
             const species = await SpeciesRepository.findById(+id)
             if(!species) return sendResponse(response, 404, ErrorStatusCode.PostNotFound)

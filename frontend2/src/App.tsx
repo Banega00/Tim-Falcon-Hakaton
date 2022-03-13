@@ -54,6 +54,9 @@ export default function App() {
             </>} />
           <Route path="/endangeredspecies" element={
             <><EndangeredSpecies/></> } />
+
+          <Route path="/endangeredspecies/:id" element={
+            <><EndangeredSpecies/></> } />
           <Route path="/successGoogleLogin" element={<SuccessGoogleLogin />} />
           <Route
             path="/home"

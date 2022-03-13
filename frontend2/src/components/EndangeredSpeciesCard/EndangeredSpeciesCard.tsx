@@ -1,7 +1,11 @@
 import React from 'react';
 import styles from './EndangeredSpeciesCard.module.scss';
 
-const EndangeredSpeciesCard = ({ id, img, text, remaining, continent }) => {
+
+
+const EndangeredSpeciesCard = ({ id, img, text, remaining, total, continent }) => {
+  
+  
     return(
 <section className={styles.endangeredSpeciesCard}>
 <div className={styles.container}>
@@ -14,7 +18,7 @@ const EndangeredSpeciesCard = ({ id, img, text, remaining, continent }) => {
       <h2>{ text }</h2>
       <div className={styles.size}>
         <h3>Remaining :</h3>
-        <span>{ remaining }</span>
+        <span>{ total }</span>
       </div>
       <div className={styles.color}>
         <h3>Continent :</h3>

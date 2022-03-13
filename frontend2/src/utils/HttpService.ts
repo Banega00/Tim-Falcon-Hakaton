@@ -1,13 +1,14 @@
 import axios, { AxiosInstance } from "axios";
 
 class _HttpService{
+  
     
   
     axiosInstance:AxiosInstance
 
         constructor() {
         this.axiosInstance = axios.create({
-            baseURL: 'http://192.168.43.189:3000',
+            baseURL: 'http://localhost:3000',
             withCredentials: true
           });      
     }
@@ -38,6 +39,10 @@ class _HttpService{
     getAnimalData = async (id:string) => {
         return await this.axiosInstance.get(`/animalProfile/${id}`);
     }
+
+    public async followSpecies(id: number) {
+        return await this.axiosInstance.get(`/followASpecies/${id}`);
+      }
 }
 
 export const HttpService = new _HttpService();

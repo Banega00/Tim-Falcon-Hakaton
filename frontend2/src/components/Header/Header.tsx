@@ -102,11 +102,15 @@ const Header = ({ isMain }) => {
                 else
                   setToggleMySpecies(true)
               }}>My Species {toggleMySpecies ? <span>▼</span> : <span>▲</span>}</a>
-              {toggleMySpecies ?
-                <div className={styles.subProfile + " " + styles.subNotProfile}>
-                  <a>Penguin</a>
-                  <a>Rhino</a>
-                </div> : <></>}
+              <div className={toggleMySpecies ? styles.subProfile + " " + styles.subNotProfile + " " + styles.active : styles.subProfile + " " + styles.subNotProfile}>
+                <a>Penguin</a>
+                <a>Rhino</a>
+              </div>
+              {/*{toggleMySpecies ?*/}
+              {/*  <div className={styles.subProfile + " " + styles.subNotProfile}>*/}
+              {/*    <a>Penguin</a>*/}
+              {/*    <a>Rhino</a>*/}
+              {/*  </div> : <></>}*/}
             </li>
             <li>
               <a onClick={() => {
@@ -115,11 +119,15 @@ const Header = ({ isMain }) => {
                 else
                   setToggleMyAnimals(true)
               }}>My Species {toggleMyAnimals ? <span>▼</span> : <span>▲</span>}</a>
-              {toggleMyAnimals ?
-                <div className={styles.subProfile + " " + styles.subNotProfile}>
-                  <a><span>Penguin</span> Pera</a>
-                  <a><span>Rhino</span> Steva</a>
-                </div> : <></>}
+              <div className={toggleMyAnimals ? styles.subProfile + " " + styles.subNotProfile + " " + styles.active : styles.subProfile + " " + styles.subNotProfile}>
+                <a><span>Penguin</span> Pera</a>
+                <a><span>Rhino</span> Steva</a>
+              </div>
+              {/*{toggleMyAnimals ?*/}
+              {/*  <div className={styles.subProfile + " " + styles.subNotProfile}>*/}
+              {/*    <a><span>Penguin</span> Pera</a>*/}
+              {/*    <a><span>Rhino</span> Steva</a>*/}
+              {/*  </div> : <></>}*/}
             </li>
             <li>
               {/*<a onClick={handleLogOut}>Profile</a>*/}
@@ -129,13 +137,18 @@ const Header = ({ isMain }) => {
                 else
                   setToggleProfile(true)
               }}>Profile {toggleProfile ? <span>▼</span> : <span>▲</span>}</a>
-              {toggleProfile ?
-                <div className={styles.subProfile}>
-                  <a>{JSON.parse(localStorage.getItem('user')!).email}</a>
-                  <a>{JSON.parse(localStorage.getItem('user')!).name}</a>
-                  <a className={styles.logoutBtn} onClick={handleLogOut}>Logout</a>
-                </div> : <></>
-              }
+              <div className={toggleProfile ? styles.subProfile + " " + styles.active : styles.subProfile}>
+                <a>{JSON.parse(localStorage.getItem('user')!).email}</a>
+                <a>{JSON.parse(localStorage.getItem('user')!).name}</a>
+                <a className={styles.logoutBtn} onClick={handleLogOut}>Logout</a>
+              </div>
+              {/*{toggleProfile ?*/}
+              {/*  <div className={styles.subProfile}>*/}
+              {/*    <a>{JSON.parse(localStorage.getItem('user')!).email}</a>*/}
+              {/*    <a>{JSON.parse(localStorage.getItem('user')!).name}</a>*/}
+              {/*    <a className={styles.logoutBtn} onClick={handleLogOut}>Logout</a>*/}
+              {/*  </div> : <></>*/}
+              {/*}*/}
             </li>
           </>
           :

@@ -48,9 +48,11 @@ export class UserController{
             user?.animalProfiles?.push(animalProfiles)
             if(!user) return sendResponse(response, 404, ErrorStatusCode.UserNotFound)
             await UserRepository.saveUser(user)
-            console.log(user)
+            animalProfiles.users?.push(user)
+            
+            await AnimalProfileRepository.addNewAnimalProfile(animalProfiles)
 
-            return sendResponse(response, 200, SuccessStatusCode.Success, user)
+            return sendResponse(response, 200, SuccessStatusCode.Success)
         }catch(error){
             console.log(error);
             return sendResponse(response, 500, ErrorStatusCode.Failure, error);

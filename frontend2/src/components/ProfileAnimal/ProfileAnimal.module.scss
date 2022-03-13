@@ -12,6 +12,7 @@ p {
   }
 }
 
+
 .overlay {
   display: none;
   position: absolute;
@@ -26,6 +27,20 @@ p {
     display: block;
   }
 }
+
+.container{
+  .mapa{
+    z-index: 1;
+    margin: 30px 0;
+    border: 20px;
+    width: 90%;
+    max-width: 350px;
+    width: 350px;
+    height: 200px;
+  }
+}
+
+
 
 .chatIcon {
   z-index: 30000;

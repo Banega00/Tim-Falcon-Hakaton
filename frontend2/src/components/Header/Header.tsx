@@ -6,11 +6,13 @@ import closeIcon from '../../images/close.png';
 import { delete_cookie, useAuth } from "../../utils/Auth";
 import { useNavigate } from "react-router-dom";
 import { HttpService } from "../../utils/HttpService";
-import {getUser} from "../../utils/util-functions";
+import { User } from "../../models/User.entity";
+import { getUser } from "../../utils/util-functions";
 
 const Header = ({ isMain }) => {
 
   const [aut, setAut] = useState<boolean>(false);
+  const [userData, setUserData] = useState<User>();
   useEffect(() => {
     HttpService.checkAuth()
       .then(response => {
@@ -21,6 +23,14 @@ const Header = ({ isMain }) => {
         setAut(false)
       });
   }, [])
+
+  useEffect(()=>{
+    const user = getUser();
+    HttpService.getUserData(user.id)
+    .then(axiosResponse =>{
+      setUserData(axiosResponse.data.payload)
+    }).catch(console.log);
+  },[])
 
   const { authed, logout } = useAuth();
   const navigate = useNavigate();
@@ -114,11 +124,11 @@ const Header = ({ isMain }) => {
                   setToggleMyAnimals(false)
                 else
                   setToggleMyAnimals(true)
-              }}>My Species {toggleMyAnimals ? <span>▼</span> : <span>▲</span>}</a>
+              }}>My Animals {toggleMyAnimals ? <span>▼</span> : <span>▲</span>}</a>
               {toggleMyAnimals ?
                 <div className={styles.subProfile + " " + styles.subNotProfile}>
-                  <a><span>Penguin</span> Pera</a>
-                  <a><span>Rhino</span> Steva</a>
+                  {userData && userData.animalProfiles && userData.animalProfiles.map(animal=>
+                    <a href={`/animal/${animal.id}`}><span>{animal.species?.name}</span> {animal.name}</a>)}
                 </div> : <></>}
             </li>
             <li>

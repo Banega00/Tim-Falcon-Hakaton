@@ -23,7 +23,7 @@ export class _UserRepository{
 
     public async findById(userId: string, entityManager?: EntityManager): Promise<User|undefined>{
         const manager = entityManager || getManager();
-        return await manager.findOne(User, userId,{relations: ['species', 'animalProfiles', 'organizations','posts']})
+        return await manager.findOne(User, userId,{relations: ['species', 'animalProfiles', 'animalProfiles.species', 'organizations','posts']})
     }
 
     public async findByEmail(email: string, entityManager?: EntityManager): Promise<User|undefined>{

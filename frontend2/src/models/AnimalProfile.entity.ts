@@ -1,4 +1,5 @@
 import { GeoData, Species } from './Species.entity';
+import { User } from './User.entity';
 
 export class AnimalProfile{
     id: number | undefined;
@@ -10,12 +11,14 @@ export class AnimalProfile{
     species?:Species | undefined;
     images: string[];
     location?: string;
-    geoData?: GeoData[] | undefined;
+    geoData?: [number, number] | undefined;
+    users: User[]
 
     constructor(animalProfile?: Partial<AnimalProfile>) {
         animalProfile?.id && (this.id = animalProfile.id)
         this.name = animalProfile?.name ?? '' 
         this.monthsOld = animalProfile?.monthsOld ?? 0 
         this.images = animalProfile?.images ?? []
+        this.users = animalProfile?.users ?? []
     }
 }

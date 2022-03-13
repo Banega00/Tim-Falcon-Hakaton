@@ -1,5 +1,6 @@
 import { GeoData, Species } from './Species.entity';
-import { Column, Entity, JoinTable, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { User } from './User.entity';
 
 @Entity()
 export class AnimalProfile{
@@ -38,7 +39,11 @@ export class AnimalProfile{
             default: []
         }
     )
-    geoData?: GeoData[] | undefined;
+    geoData?: [number, number] | undefined;
+
+    @ManyToMany(() => User)
+    @JoinTable() 
+    users?: User[] | undefined; 
 
     constructor(animalProfile?: Partial<AnimalProfile>) {
         animalProfile?.id && (this.id = animalProfile.id)

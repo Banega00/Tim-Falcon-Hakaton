@@ -12,42 +12,42 @@ import AnimalProfileCard from "../AnimalProfileCard/AnimalProfileCard";
 import { FaHeart } from 'react-icons/fa';
 import { arraySum } from '../EndangeredSpecies/EndangeredSpecies';
 
-export const colorBasedOnNumber = (num:number | undefined)=>{
-  if(!num) return 'black'
-  if(num < 10) return 'red'
-  if(num < 50) return 'orange'
-  if(num < 100) return 'yellow'
-  if(num < 500) return 'greem'
+export const colorBasedOnNumber = (num: number | undefined) => {
+  if (!num) return 'black'
+  if (num < 10) return 'red'
+  if (num < 50) return 'orange'
+  if (num < 100) return 'yellow'
+  if (num < 500) return 'green'
 }
 
 export const SpeciesPage: React.FC<any> = () => {
   let { id } = useParams();
   const navigate = useNavigate();
   const [speciesData, setSpeciesData] = useState<Species | undefined>(undefined);
-  useEffect(()=>{
-    if(id && +id){
+  useEffect(() => {
+    if (id && +id) {
       HttpService.getSpeciesData(id)
-      .then(axiosResponse => {
-        const response:ResponseModel = axiosResponse.data;
-        setSpeciesData(response.payload)
-        setAnimals(response.payload.animalProfiles)
-      })
+        .then(axiosResponse => {
+          const response: ResponseModel = axiosResponse.data;
+          setSpeciesData(response.payload)
+          setAnimals(response.payload.animalProfiles)
+        })
     }
-  },[])
+  }, [])
 
-  const isUserAlreadyFollow = () =>{
+  const isUserAlreadyFollow = () => {
     const loggedInUser = getUser()
-    if(!loggedInUser) return false
+    if (!loggedInUser) return false
     const bool = speciesData?.users.some(user => user.id === loggedInUser.id)
     return bool;
   }
 
-  const followSpecies = (event) =>{
+  const followSpecies = (event) => {
     event.target.classList.add('alreadyFollow')
     const user = getUser();
-    if(user){
-      if(isUserAlreadyFollow()) return;
-    }else{
+    if (user) {
+      if (isUserAlreadyFollow()) return;
+    } else {
       navigate('/login')
     }
 
@@ -55,10 +55,10 @@ export const SpeciesPage: React.FC<any> = () => {
     return true;
   }
 
-  const[animals, setAnimals] = useState([
-    {pfp: slika, name: "Pera", followers: 305, age: 12},
-    {pfp: slika, name: "Pera", followers: 305, age: 12},
-    {pfp: slika, name: "Pera", followers: 305, age: 12},
+  const [animals, setAnimals] = useState([
+    { pfp: slika, name: "Pera", followers: 305, age: 12 },
+    { pfp: slika, name: "Pera", followers: 305, age: 12 },
+    { pfp: slika, name: "Pera", followers: 305, age: 12 },
   ])
 
   return (
@@ -67,8 +67,8 @@ export const SpeciesPage: React.FC<any> = () => {
         <div className={styles.firstPart}>
           <div>
             {speciesData && <div className={styles.sName}><p>{speciesData.name}</p></div>}
-            <div className={isUserAlreadyFollow() ? styles.followBtn + " " + styles.alreadyFollow : styles.followBtn }>
-              {<FaHeart onClick={followSpecies}/>}
+            <div className={isUserAlreadyFollow() ? styles.followBtn + " " + styles.alreadyFollow : styles.followBtn}>
+              {<FaHeart onClick={followSpecies} />}
             </div>
           </div>
           {/* <div className={styles.mainImg} src="/src/images/beloglavi-sup-2.jpg"/> */}
@@ -80,38 +80,38 @@ export const SpeciesPage: React.FC<any> = () => {
           <div className={styles.about}>
             <span className={styles.span}>Alive:</span> {speciesData && arraySum(speciesData.alive)}
           </div>
-        </div>
-
-        <MapContainer className={styles.mapa} center={[51.505, -0.09]} zoom={3}>
-          <TileLayer
-            attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-            url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
-            maxZoom={8}
-          />
-          {/* <Marker position={[44.8125,
+          <MapContainer className={styles.mapa} center={[51.505, -0.09]} zoom={3}>
+            <TileLayer
+              attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+              url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
+              maxZoom={8}
+            />
+            {/* <Marker position={[44.8125,
             20.4612]}>
             <Popup>
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>
           </Marker> */}
-          {speciesData?.geoData && speciesData?.alive && speciesData.geoData.map((polygon, index) => <Polygon pathOptions={{ color: 'black', fillColor: colorBasedOnNumber(speciesData?.alive[index]), weight: 1, fillOpacity:0.5 }} positions={flipCoordinatesArray(polygon)} />)})
-        </MapContainer>
+            {speciesData?.geoData && speciesData?.alive && speciesData.geoData.map((polygon, index) => <Polygon pathOptions={{ color: 'black', fillColor: colorBasedOnNumber(speciesData?.alive[index]), weight: 1, fillOpacity: 0.5 }} positions={flipCoordinatesArray(polygon)} />)})
+          </MapContainer>
+        </div>
+
 
         <div className={styles.organizations}>
           <h1>Help me, save me.</h1>
-          {speciesData?.organizations?.map(organization => 
-          <div className={styles.organization}>
-            <img src={require(`../../images/organization/${organization.logoImage}`)}/>
-            <h1>{organization.name}</h1>
-            <button><a href={organization.webSiteURL}>Donate here!</a></button>
-          </div>)}
-          
+          {speciesData?.organizations?.map(organization =>
+            <div className={styles.organization}>
+              <img src={require(`../../images/organization/${organization.logoImage}`)} />
+              <h1>{organization.name}</h1>
+              <button><a href={organization.webSiteURL}>Donate here!</a></button>
+            </div>)}
+
         </div>
 
         <div className={styles.organizations}>
           {animals.map((animal) =>
             <>
-            <AnimalProfileCard animal={animal}></AnimalProfileCard>
+              <AnimalProfileCard animal={animal}></AnimalProfileCard>
             </>
           )}
         </div>

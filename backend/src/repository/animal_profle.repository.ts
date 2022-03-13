@@ -30,9 +30,8 @@ export class _AnimalProfileRepository{
 
     public async findById(animalProfileId: number, entityManager?: EntityManager): Promise<AnimalProfile|undefined>{
         const manager = entityManager || getManager();
-        let animalProfile;
-        animalProfile = await manager.findOne(AnimalProfile, animalProfileId,{relations: ['species']})
-        animalProfile?.geoData && (animalProfile.geoData = JSON.parse(animalProfile?.geoData))
+        const animalProfile = await manager.findOne(AnimalProfile, animalProfileId,{relations: ['species', 'users']})
+        animalProfile?.geoData && (animalProfile.geoData = animalProfile?.geoData)
         return animalProfile
     }
 
@@ -43,7 +42,7 @@ export class _AnimalProfileRepository{
 
     public async addNewAnimalProfile(newAnimalProfile: AnimalProfile, entityManager?: EntityManager) {
         const manager = entityManager || getManager();
-        return await manager.save(AnimalProfile, new AnimalProfile(newAnimalProfile))
+        return await manager.save(AnimalProfile, newAnimalProfile)
     }
 
 }

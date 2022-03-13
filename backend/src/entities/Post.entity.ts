@@ -16,6 +16,9 @@ export class Post{
     @JoinTable()
     relatedSpecies?:Species[] | undefined;
 
+    @Column({nullable: true})
+    image:string
+
     @ManyToOne(() => User, user => user.posts)
     @JoinTable()
     user?:User | undefined;
@@ -24,6 +27,7 @@ export class Post{
         post?.id && (this.id = post.id)
         this.title = post?.title ?? '' 
         this.mainText = post?.mainText ?? '' 
+        this.image = post?.image ?? '' 
         this.user = post?.user
         this.relatedSpecies = post?.relatedSpecies
         // this.relatedSpecies = post?.relatedSpecies ?? ''

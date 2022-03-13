@@ -32,7 +32,7 @@ export class User{
 
     @ManyToMany(() => Species)
     @JoinTable() 
-    species?: Species[] | undefined;
+    species?: Species[] | undefined; 
 
     constructor(user?: Partial<User>) {
         this.id = user?.id ?? uuidv4();

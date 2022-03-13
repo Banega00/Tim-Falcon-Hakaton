@@ -16,6 +16,20 @@ export class UserController{
         }
     }
 
+    followASpecies = async (request: Request, response: Response) =>{
+        const { id } = request.params;
+        console.log(request.session.passport);
+        
+        try{
+            const user = await UserRepository.findById(id)
+            if(!user) return sendResponse(response, 404, ErrorStatusCode.UserNotFound)
+            return sendResponse(response, 200, SuccessStatusCode.Success, user)
+        }catch(error){
+            console.log(error);
+            return sendResponse(response, 500, ErrorStatusCode.Failure, error);
+        }
+    }
+
     getUserById = async (request: Request, response: Response) =>{
         const { id } = request.params;
         try{

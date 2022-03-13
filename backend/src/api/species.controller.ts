@@ -16,6 +16,19 @@ export class SpeciesController{
         }
     }
 
+    followASpecies = async (request: Request, response: Response) =>{
+        let { id } = request.params; 
+        console.log(request.session.passport);
+        try{
+            const species = await SpeciesRepository.findById(+id)
+            if(!species) return sendResponse(response, 404, ErrorStatusCode.PostNotFound)
+            return sendResponse(response, 200, SuccessStatusCode.Success, species)
+        }catch(error){
+            console.log(error);
+            return sendResponse(response, 500, ErrorStatusCode.Failure, error);
+        }
+    }
+
     getSpeciesById = async (request: Request, response: Response) =>{
         let { id } = request.params; 
         try{

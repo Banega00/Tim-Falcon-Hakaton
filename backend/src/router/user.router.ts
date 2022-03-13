@@ -1,5 +1,6 @@
 import { UserController } from './../api/user.controller.';
 import express from "express";
+import { checkAuthenticated } from '../authorization/passport-configuration';
 
 const router = express.Router()
 

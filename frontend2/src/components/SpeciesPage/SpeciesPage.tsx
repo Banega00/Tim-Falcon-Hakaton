@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 // import styles from './SpeciesPage.module.scss'
 import styles from './SpeciesPage.module.scss'
 import { MapContainer, TileLayer, Marker, Popup, Polygon } from 'react-leaflet'
-// import slika from '../../images/beloglavi-sup-2.jpg'
+import slika from '../../images/falcon-logo-1.png'
 import { flipCoordinatesArray } from '../../utils/util-functions';
 import { useParams } from 'react-router-dom';
 import { HttpService } from '../../utils/HttpService';
 import { Species } from '../../models/Species.entity';
 import { ResponseModel } from '../../models/ResponseModel';
 import bgImg from "../../images/bgg.jpg";
+import AnimalProfileCard from "../AnimalProfileCard/AnimalProfileCard";
 
 export const colorBasedOnNumber = (num:number | undefined)=>{
   if(!num) return 'black'
@@ -30,6 +31,12 @@ export const SpeciesPage: React.FC<any> = () => {
       })
     }
   },[])
+
+  const[animals, setAnimals] = useState([
+    {pfp: slika, name: "Pera", followers: 305, age: 12},
+    {pfp: slika, name: "Pera", followers: 305, age: 12},
+    {pfp: slika, name: "Pera", followers: 305, age: 12},
+  ])
 
   return (
     <div className={styles.container}>
@@ -63,7 +70,30 @@ export const SpeciesPage: React.FC<any> = () => {
         </MapContainer>
 
         <div className={styles.organizations}>
-          <div className={styles.organization}></div>
+          <h1>Help me, save me.</h1>
+          <div className={styles.organization}>
+            <img src={slika}/>
+            <h1>Company name</h1>
+            <button>Donate here!</button>
+          </div>
+          <div className={styles.organization}>
+            <img src={slika}/>
+            <h1>Company name</h1>
+            <button>Donate here!</button>
+          </div>
+          <div className={styles.organization}>
+            <img src={slika}/>
+            <h1>Company name</h1>
+            <button>Donate here!</button>
+          </div>
+        </div>
+
+        <div className={styles.organizations}>
+          {animals.map((animal) =>
+            <>
+            <AnimalProfileCard animal={animal}></AnimalProfileCard>
+            </>
+          )}
         </div>
 
 

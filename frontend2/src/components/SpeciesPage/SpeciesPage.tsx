@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 // import styles from './SpeciesPage.module.scss'
 import styles from './SpeciesPage.module.scss'
 import { MapContainer, TileLayer, Marker, Popup, Polygon } from 'react-leaflet'
-import slika from '../../images/beloglavi-sup-2.jpg'
+// import slika from '../../images/beloglavi-sup-2.jpg'
 import { flipCoordinatesArray } from '../../utils/util-functions';
 import { useParams } from 'react-router-dom';
 import { HttpService } from '../../utils/HttpService';
@@ -34,7 +34,7 @@ export const SpeciesPage: React.FC<any> = () => {
     <div className={styles.main}>
       {speciesData && <div>{speciesData.name}</div>}
       {/* <div className={styles.mainImg} src="/src/images/beloglavi-sup-2.jpg"/> */}
-      <img className={styles.mainImg} src={slika} alt="" />
+      {speciesData && <img className={styles.mainImg} src={require(`../../images/${speciesData?.images[0]}`)} alt="" />}
 
       <MapContainer className={styles.mapa} center={[51.505, -0.09]} zoom={3}>
         <TileLayer

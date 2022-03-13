@@ -13,7 +13,7 @@ export class Species{
     description?: string;
     relatedSpecies?:Post[] | undefined;
     animalProfiles?:AnimalProfile[] | undefined;
-    images?: string[] | undefined;
+    images: string[];
     geoData?: GeoData[][] | undefined;
 
     constructor(species?: Partial<Species>) {
@@ -23,6 +23,7 @@ export class Species{
         // this.dead = species?.dead ?? 0
         this.description = species?.description ?? '' 
         this.animalProfiles = species?.animalProfiles
-        this.relatedSpecies = species?.relatedSpecies
+        this.relatedSpecies = species?.relatedSpecies    
+        this.images = species?.images ?? []    
     }
 }

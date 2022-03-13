@@ -33,37 +33,41 @@ export const SpeciesPage: React.FC<any> = () => {
   },[])
 
   return (
-    <div className={styles.main}>
-      {speciesData && <div>{speciesData.name}</div>}
-      {/* <div className={styles.mainImg} src="/src/images/beloglavi-sup-2.jpg"/> */}
-      <img className={styles.mainImg} src={slika} alt="" />
+    <div className={styles.container}>
+      <div className={styles.main}>
+        <div className={styles.firstPart}>
+          {speciesData && <div className={styles.sName}><p>{speciesData.name}</p></div>}
+          {/* <div className={styles.mainImg} src="/src/images/beloglavi-sup-2.jpg"/> */}
+          <img className={styles.mainImg} src={slika} alt="" />
+          <div>
+            O vrsti:
+            {speciesData && speciesData.description}
+          </div>
 
-      <MapContainer className={styles.mapa} center={[51.505, -0.09]} zoom={3}>
-        <TileLayer
-          attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-          url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
-          maxZoom={8}
-        />
-        <Marker position={[44.8125,
-          20.4612]}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
-        {geoData && speciesData?.alive && geoData.map((polygon, index) => <Polygon pathOptions={{ color: 'black', fillColor: colorBasedOnNumber(speciesData?.alive[index]), weight: 1, fillOpacity:0.5 }} positions={flipCoordinatesArray(polygon)} />)})
-      </MapContainer>
+          <div>
+            Broj jedinki:
+            {speciesData && speciesData.alive}
+          </div>
+        </div>
 
-      <div>
-        O vrsti:
-        {speciesData && speciesData.description}
+        <MapContainer className={styles.mapa} center={[51.505, -0.09]} zoom={3}>
+          <TileLayer
+            attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+            url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
+            maxZoom={8}
+          />
+          <Marker position={[44.8125,
+            20.4612]}>
+            <Popup>
+              A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+          </Marker>
+          {geoData && speciesData?.alive && geoData.map((polygon, index) => <Polygon pathOptions={{ color: 'black', fillColor: colorBasedOnNumber(speciesData?.alive[index]), weight: 1, fillOpacity:0.5 }} positions={flipCoordinatesArray(polygon)} />)})
+        </MapContainer>
+
+
+
       </div>
-
-      <div>
-        Broj jedinki:
-        {speciesData && speciesData.alive}
-      </div>
-
-
     </div>
   );
 }

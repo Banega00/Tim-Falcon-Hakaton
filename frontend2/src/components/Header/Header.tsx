@@ -1,18 +1,23 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import styles from "./Header.module.scss";
 import logoImg from '../../images/falcon-logo-1.png';
 import menuIcon from '../../images/menu.png';
 import closeIcon from '../../images/close.png';
 
-const Header = () => {
+const Header = ({isMain}) => {
 
-  const[scroll, setScroll] = useState(false);
+  const[scroll, setScroll] = useState(!isMain);
+
+  // if (isMain)
+  //   setScroll(true);
 
   window.addEventListener("scroll", () => {
-    if (window.scrollY > 50)
-      setScroll(true);
-    else
-      setScroll(false);
+    if (isMain) {
+      if (window.scrollY > 50)
+        setScroll(true);
+      else
+        setScroll(false);
+    }
   })
 
   const[menu, setMenu] = useState(false);

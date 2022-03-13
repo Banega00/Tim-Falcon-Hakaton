@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 import { HttpService } from '../../utils/HttpService';
 import { Species } from '../../models/Species.entity';
 import { ResponseModel } from '../../models/ResponseModel';
+import bgImg from "../../images/bgg.jpg";
 
 export const colorBasedOnNumber = (num:number | undefined)=>{
   if(!num) return 'black'
@@ -31,37 +32,42 @@ export const SpeciesPage: React.FC<any> = () => {
   },[])
 
   return (
-    <div className={styles.main}>
-      {speciesData && <div>{speciesData.name}</div>}
-      {/* <div className={styles.mainImg} src="/src/images/beloglavi-sup-2.jpg"/> */}
-      {speciesData && <img className={styles.mainImg} src={require(`../../images/${speciesData?.images[0]}`)} alt="" />}
+    <div className={styles.container}>
+      <div className={styles.main}>
+        <div className={styles.firstPart}>
+          {speciesData && <div className={styles.sName}><p>{speciesData.name}</p></div>}
+          {/* <div className={styles.mainImg} src="/src/images/beloglavi-sup-2.jpg"/> */}
+          {speciesData && <img className={styles.mainImg} src={require(`../../images/${speciesData?.images[0]}`)} alt="" />}
+          <div className={styles.about}>
+            <span className={styles.span}>O vrsti</span>: {speciesData && speciesData.description}
+          </div>
 
-      <MapContainer className={styles.mapa} center={[51.505, -0.09]} zoom={3}>
-        <TileLayer
-          attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
-          url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
-          maxZoom={8}
-        />
-        <Marker position={[44.8125,
-          20.4612]}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
-        {speciesData?.geoData && speciesData?.alive && speciesData.geoData.map((polygon, index) => <Polygon pathOptions={{ color: 'black', fillColor: colorBasedOnNumber(speciesData?.alive[index]), weight: 1, fillOpacity:0.5 }} positions={flipCoordinatesArray(polygon)} />)})
-      </MapContainer>
+          <div className={styles.about}>
+            <span className={styles.span}>Broj jedinki:</span> {speciesData && speciesData.alive}
+          </div>
+        </div>
 
-      <div>
-        O vrsti:
-        {speciesData && speciesData.description}
+        <MapContainer className={styles.mapa} center={[51.505, -0.09]} zoom={3}>
+          <TileLayer
+            attribution='Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)'
+            url="https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png"
+            maxZoom={8}
+          />
+          <Marker position={[44.8125,
+            20.4612]}>
+            <Popup>
+              A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+          </Marker>
+          {speciesData?.geoData && speciesData?.alive && speciesData.geoData.map((polygon, index) => <Polygon pathOptions={{ color: 'black', fillColor: colorBasedOnNumber(speciesData?.alive[index]), weight: 1, fillOpacity:0.5 }} positions={flipCoordinatesArray(polygon)} />)})
+        </MapContainer>
+
+        <div className={styles.organizations}>
+          <div className={styles.organization}></div>
+        </div>
+
+
       </div>
-
-      <div>
-        Broj jedinki:
-        {speciesData && speciesData.alive}
-      </div>
-
-
     </div>
   );
 }

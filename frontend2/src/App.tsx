@@ -33,11 +33,18 @@ export default function App() {
     <div>
       {/* <Nav /> */}
       <BrowserRouter>
-        <Header></Header>
         <Routes>
-          <Route path={'/'} element={<Main/>}/>
+          <Route path={'/'} element={
+            <>
+              <Header isMain={true}/>
+              <Main/>
+            </>}/>
           <Route path="/login" element={<Login />} />
-          <Route path="/species/:id" element={<SpeciesPage />} />
+          <Route path="/species/:id" element={
+            <>
+              <Header isMain={false}/>
+              <SpeciesPage/>
+            </>} />
           <Route path="/endangeredspecies" element={ <EndangeredSpecies/> } />
           <Route path="/successGoogleLogin" element={<SuccessGoogleLogin />} />
           <Route

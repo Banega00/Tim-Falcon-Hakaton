@@ -20,14 +20,56 @@ const EndangeredSpecies = () => {
     }
     return(
         <section className={styles.endangeredSpecies}>
+            <div className={styles.filteri}>
+                <div className={styles.stanisteContainer}>
+                    <div className={styles.stanisteNaslovContainer}>
+                        <h1>Habitat</h1>
+                        <div className="boxes">
+
+                        <input type="checkbox" id="box-1"/>
+                        <label htmlFor="box-1">Water</label>
+
+                        <input type="checkbox" id="box-2"/>
+                        <label htmlFor="box-2">Land</label>
+
+                        <input type="checkbox" id="box-3"/>
+                        <label htmlFor="box-3">Forest</label>
+                    </div>
+                </div>
+            </div>
+                <div className={styles.kontinentContainer}>
+                    <div className={styles.kontinentNaslovContainer}>
+                    <h1>Continent</h1>
+                    <div className="boxes">
+
+                        <input type="checkbox" id="box-4"/>
+                        <label htmlFor="box-4">Europe</label>
+
+                        <input type="checkbox" id="box-5"/>
+                        <label htmlFor="box-5">North America</label>
+
+                        <input type="checkbox" id="box-6"/>
+                        <label htmlFor="box-6">South America</label>
+
+                        <input type="checkbox" id="box-7"/>
+                        <label htmlFor="box-7">Asia</label>
+
+                        <input type="checkbox" id="box-8"/>
+                        <label htmlFor="box-6">Africa</label>
+
+                        <input type="checkbox" id="box-9"/>
+                        <label htmlFor="box-9">Australia</label>
+                    </div>
+                    </div>
+                </div>
+            </div>
             <div className={styles.endangeredSpeciesContainer}>
             <h1>Endangered Species</h1>
-            <div>
-                FILTER:
+            <div className={styles.rangeContainer}>
                 <label htmlFor="conservationStatus">
                 Conservation Status
-                <input type="range" name="conservationStatus" onChange={handleConservationStatus} min="1" max="8"/>
                 </label>
+                <input type="range" name="conservationStatus" onChange={handleConservationStatus} min="1" max="8" defaultValue={1}/>
                 {conservationStatus && <div>{statusesArray[statusesArray.length-conservationStatus]}</div>}
             </div>
             <div className={styles.cards}>

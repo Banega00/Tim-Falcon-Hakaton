@@ -52,7 +52,7 @@ export const Login = () => {
         <button className={styles.signinBtn} onClick={handleGoogleLogin}>Sing in with google</button>
 
         {/* if server response exists log it*/}
-        {serverResponse && <div>{serverResponse.payload.message}</div>}
+        {serverResponse && <div><p className={styles.error}>{serverResponse.payload.message}</p></div>}
       </div>
     </div>
   );

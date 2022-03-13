@@ -18,7 +18,7 @@ export class _UserRepository{
         if(user) return user;
 
 
-        await this.addNewUser(new User(userData));
+        await this.saveUser(new User(userData));
     }
 
     public async findById(userId: string, entityManager?: EntityManager): Promise<User|undefined>{
@@ -31,7 +31,7 @@ export class _UserRepository{
         return await manager.findOne(User, {email: email})
     }
 
-    public async addNewUser(newUser: User, entityManager?: EntityManager) {
+    public async saveUser(newUser: User, entityManager?: EntityManager) {
         const manager = entityManager || getManager();
         return await manager.save(User, new User(newUser))
     }

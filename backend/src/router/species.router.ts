@@ -1,5 +1,6 @@
 import { SpeciesController } from './../api/species.controller';
 import express from "express";
+import { checkAuthenticated } from '../authorization/passport-configuration';
 
 const router = express.Router()
 

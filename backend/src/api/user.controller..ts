@@ -3,6 +3,7 @@ import { UserRepository } from '../repository/user.repository';
 import { Request, Response } from "express";
 import { sendResponse } from '../utils/wrappers/response-wrapper';
 import { SuccessStatusCode } from '../utils/status-codes';
+import { SpeciesRepository } from '../repository/species.repository';
 
 export class UserController{
 
@@ -21,8 +22,13 @@ export class UserController{
         console.log(request.session.passport);
         
         try{
-            const user = await UserRepository.findById(id)
+            if(!request.session.passport)return  sendResponse(response, 500, ErrorStatusCode.Failure, 'Nema usera');
+            const user = await UserRepository.findById(request.session.passport.id)
+            const species = await SpeciesRepository.findById(+id)
+            if(!species)return  sendResponse(response, 500, ErrorStatusCode.Failure, 'Nema species');
+            user?.species?.push(species)
             if(!user) return sendResponse(response, 404, ErrorStatusCode.UserNotFound)
+            await UserRepository.saveUser(user)
             return sendResponse(response, 200, SuccessStatusCode.Success, user)
         }catch(error){
             console.log(error);

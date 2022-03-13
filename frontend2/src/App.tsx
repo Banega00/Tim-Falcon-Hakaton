@@ -45,7 +45,8 @@ export default function App() {
               <Header isMain={false}/>
               <SpeciesPage/>
             </>} />
-          <Route path="/endangeredspecies" element={ <EndangeredSpecies/> } />
+          <Route path="/endangeredspecies" element={
+            <><Header isMain={false}></Header><EndangeredSpecies/></> } />
           <Route path="/successGoogleLogin" element={<SuccessGoogleLogin />} />
           <Route
             path="/home"

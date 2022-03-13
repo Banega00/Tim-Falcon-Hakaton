@@ -50,6 +50,7 @@ export class UserController{
             if(!user) return sendResponse(response, 404, ErrorStatusCode.UserNotFound)
             await UserRepository.saveUser(user)
             console.log(user)
+
             return sendResponse(response, 200, SuccessStatusCode.Success, user)
         }catch(error){
             console.log(error);

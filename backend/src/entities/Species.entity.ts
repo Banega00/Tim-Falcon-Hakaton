@@ -10,7 +10,7 @@ export enum ContinentEnum  {
     ASIA = 'Asia',
     AFRICA = 'Africa',
     NORTH_AMERICA = 'North America',
-    SOUTH_AMERICA = 'North America',
+    SOUTH_AMERICA = 'South America',
     AUSTRAILA = 'Australia',
     ANTARTICA = 'Antartica'
 

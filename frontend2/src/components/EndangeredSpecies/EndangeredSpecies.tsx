@@ -9,7 +9,7 @@ import {useParams} from 'react-router-dom';
 export const arraySum = (array) =>{
     let sum = 0;
     array.forEach(element => {
-      sum+=element;
+      sum+=+element;
     });
     return sum;
   }

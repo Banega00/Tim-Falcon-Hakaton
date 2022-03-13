@@ -1,0 +1,31 @@
+.news {
+    background: var(--darkerGreen);
+}
+
+.newsContainer {
+    margin: 0rem 5rem;
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+/* From https://css.glass */
+background: rgba(255, 255, 255, 0.5);
+box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+backdrop-filter: blur(6px);
+-webkit-backdrop-filter: blur(6px);
+border: 1px solid rgba(255, 255, 255, 0.23);
+
+    h1 {
+        color: var(--darkJungleGreen);
+        font-size: 5rem;
+        margin-left: 2rem;
+    }
+
+    .listNews {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}

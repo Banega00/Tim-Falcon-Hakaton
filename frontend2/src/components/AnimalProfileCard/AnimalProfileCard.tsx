@@ -13,8 +13,8 @@ const AnimalProfileCard = ({animal}) => {
           <div className={styles.contentBx}>
             <h2>{ animal.name }</h2>
             <div className={styles.size}>
-              <h3>Followers :</h3>
-              <span>{ animal && (animal.users ? animal.users.length : 0) }</span>
+              <h3 >Followers :</h3>
+              <span style={{ fontSize:"1.5rem"}}>{ animal && (animal.users ? animal.users.length : 0) }</span>
             </div>
             <div className={styles.color}>
               <h3>Months old: :</h3>

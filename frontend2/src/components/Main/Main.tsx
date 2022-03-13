@@ -14,11 +14,12 @@ const Main = () => {
     <div className={styles.main}>
       <div className={styles.title}>
         <h1>
-          <span>I</span>
-          <span>V</span>
+          <span>F</span>
+          <span>A</span>
+          <span>L</span>
+          <span>C</span>
           <span>O</span>
-          <span>R</span>
-          <span>Y</span>
+          <span>N</span>
         </h1>
         <p></p>
       </div>
@@ -33,15 +34,15 @@ const Main = () => {
         <div className={styles.row}>
           <div className={styles.card}>
             <p>Endangered spicies</p>
-            <CountUp className={styles.count} duration={2} end={41415}></CountUp>
+            <CountUp className={styles.count} duration={2} end={612}></CountUp>
           </div>
           <div className={styles.card}>
             <p>Extinct spicies</p>
-            <CountUp className={styles.count} duration={2} end={50}></CountUp>
+            <CountUp className={styles.count} duration={2} end={973}></CountUp>
           </div>
           <div className={styles.card + " " + styles.newBtn}>
-            <p>News</p>
-            <CountUp className={styles.count} duration={2} end={30}></CountUp>
+            <p>Saved from extinction</p>
+            <CountUp className={styles.count} duration={2} end={91}></CountUp>
           </div>
         </div>
       </div>

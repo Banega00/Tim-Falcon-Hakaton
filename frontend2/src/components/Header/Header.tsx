@@ -86,7 +86,7 @@ const Header = ({ isMain }) => {
             <a href={'#'}>About</a>
           </li>
           <li>
-            <a href={'#'}>Contact</a>
+            <a href={'#'}>News</a>
           </li>
           <li>
             <a href={'/login'}>Log in</a>
@@ -102,7 +102,7 @@ const Header = ({ isMain }) => {
           <a href={'/endangeredspecies'}>Species</a>
         </li>
         <li>
-          <a href={'/'}>Contact</a>
+          <a href={'/news'}>News</a>
         </li>
         {localStorage.getItem('user') ?
           <>
@@ -114,8 +114,10 @@ const Header = ({ isMain }) => {
                   setToggleMySpecies(true)
               }}>My Species {toggleMySpecies ? <span>▼</span> : <span>▲</span>}</a>
               <div className={toggleMySpecies ? styles.subProfile + " " + styles.subNotProfile + " " + styles.active : styles.subProfile + " " + styles.subNotProfile}>
-                {userData && userData.animalProfiles && userData.animalProfiles.map(animalProfile => {
-                  return <a href={`/animal/${animalProfile.id}`}>{animalProfile.species?.name + " - " + animalProfile.name}</a>
+
+
+                {userData && userData.species && userData.species.map(species => {
+                  return <a href={`/species/${species.id}`}>{species.name}</a>
                 })}
               </div>
               {/*{toggleMySpecies ?*/}
@@ -145,7 +147,7 @@ const Header = ({ isMain }) => {
                 else
                   setToggleProfile(true)
               }}>Profile {toggleProfile ? <span>▼</span> : <span>▲</span>}</a>
-              <div className={toggleProfile ? styles.subProfile + " " + styles.active : styles.subProfile}>
+              <div className={toggleProfile ? styles.profileSub + " " + styles.subProfile + " " + styles.active : styles.profileSub + " " + styles.subProfile}>
                 <a>{JSON.parse(localStorage.getItem('user')!).email}</a>
                 <a>{JSON.parse(localStorage.getItem('user')!).name}</a>
                 <a className={styles.logoutBtn} onClick={handleLogOut}>Logout</a>

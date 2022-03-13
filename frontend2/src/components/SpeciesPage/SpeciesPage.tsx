@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-// import styles from './SpeciesPage.module.scss'
 import styles from './SpeciesPage.module.scss'
 import { MapContainer, TileLayer, Marker, Popup, Polygon } from 'react-leaflet'
 import slika from '../../images/falcon-logo-1.png'
@@ -73,12 +72,20 @@ export const SpeciesPage: React.FC<any> = () => {
           </div>
           {/* <div className={styles.mainImg} src="/src/images/beloglavi-sup-2.jpg"/> */}
           {speciesData && <img className={styles.mainImg} src={require(`../../images/${speciesData?.images[0]}`)} alt="" />}
-          <div className={styles.about}>
-            <span className={styles.span}>About:</span>: {speciesData && speciesData.description}
+          <div style={{marginBottom:"15px"}} className={styles.about}>
+            <span className={styles.span}><span style={{fontSize:"1.4rem"}}>About </span></span>: {speciesData && speciesData.description}
           </div>
 
-          <div className={styles.about}>
-            <span className={styles.span}>Alive:</span> {speciesData && arraySum(speciesData.alive)}
+          <div style={{marginBottom:"15px", fontSize:"1.6rem"}} className={styles.about}>
+            <span className={styles.span} >Alive:</span> {speciesData && arraySum(speciesData.alive)}
+          </div>
+
+          <div style={{marginBottom:"15px"}} className={styles.about}>
+            <span className={styles.span}><span style={{fontSize:"1.4rem"}}>Reason of endangerment: </span></span> {speciesData && speciesData.reasonOfEndangerment}
+          </div>
+
+          <div style={{marginBottom:"5px"}} className={styles.about}>
+            <span className={styles.span}><span style={{fontSize:"1.4rem"}}>How to help: </span></span> {speciesData && speciesData.howToHelp}
           </div>
           <MapContainer className={styles.mapa} center={[51.505, -0.09]} zoom={3}>
             <TileLayer
@@ -92,8 +99,14 @@ export const SpeciesPage: React.FC<any> = () => {
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>
           </Marker> */}
-            {speciesData?.geoData && speciesData?.alive && speciesData.geoData.map((polygon, index) => <Polygon pathOptions={{ color: 'black', fillColor: colorBasedOnNumber(speciesData?.alive[index]), weight: 1, fillOpacity: 0.5 }} positions={flipCoordinatesArray(polygon)} />)})
+            {speciesData?.geoData && speciesData?.alive && speciesData.geoData.map((polygon, index) => <Polygon pathOptions={{ color: 'black', fillColor: colorBasedOnNumber(speciesData?.alive[index]), weight: 1, fillOpacity: 0.5 }} positions={flipCoordinatesArray(polygon)}  />)})
           </MapContainer>
+          <div className={styles.legend}>Legend 
+            <div style={{ textShadow:"2px 2px #000000", color:"red"}}>	&lt;10 </div>
+            <div style={{ textShadow:"2px 2px #000000", color:"orange"}}>	&lt;50 </div>
+            <div style={{ textShadow:"2px 2px #000000", color:"yellow"}}>	&lt;100 </div>
+            <div style={{ textShadow:"2px 2px #000000", color:"green"}}>	&lt;500 </div>
+          </div>
         </div>
 
 

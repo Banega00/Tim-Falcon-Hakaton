@@ -14,9 +14,10 @@ import "./App.css";
 import Header from "./components/Header/Header";
 import QuotePage from "./components/QuotePage/QuotePage";
 import PlanetEarth from "./components/PlanetEarth/PlanetEarth";
-import {AnimalProfile} from "./models/AnimalProfile.entity";
+import { AnimalProfile } from "./models/AnimalProfile.entity";
 import AnimalProfileCard from "./components/AnimalProfileCard/AnimalProfileCard";
 import ProfileAnimal from "./components/ProfileAnimal/ProfileAnimal";
+import News from "./components/News/News";
 
 //Route Guard component
 const RequireAuth: React.FC<any> = ({ children }) => {
@@ -24,11 +25,11 @@ const RequireAuth: React.FC<any> = ({ children }) => {
   const [aut, setAut] = React.useState(true);
   React.useEffect(() => {
     HttpService.checkAuth()
-    .then(response => {
-      localStorage.setItem("user", JSON.stringify(response.data.payload.user))
-      setAut(true)
-    })
-    .catch(response => setAut(false));
+      .then(response => {
+        localStorage.setItem("user", JSON.stringify(response.data.payload.user))
+        setAut(true)
+      })
+      .catch(response => setAut(false));
   }, [location])
   return aut === true ? children : <Navigate to="/login" replace state={{ path: location.pathname }} />
 }
@@ -38,25 +39,25 @@ export default function App() {
     <div>
       {/* <Nav /> */}
       <BrowserRouter>
-        <Header isMain={true}/>
+        <Header isMain={true} />
         <Routes>
           <Route path={'/'} element={
             <>
-              <Main/>
-              <QuotePage/>
-              <PlanetEarth/>
-            </>}/>
+              <Main />
+              <QuotePage />
+              <PlanetEarth />
+            </>} />
           <Route path="/login" element={<Login />} />
           <Route path="/species/:id" element={
             <>
               {/*<Header isMain={false}/>*/}
-              <SpeciesPage/>
+              <SpeciesPage />
             </>} />
           <Route path="/endangeredspecies" element={
-            <><EndangeredSpecies/></> } />
+            <><EndangeredSpecies /></>} />
 
           <Route path="/endangeredspecies/:id" element={
-            <><EndangeredSpecies/></> } />
+            <><EndangeredSpecies /></>} />
           <Route path="/successGoogleLogin" element={<SuccessGoogleLogin />} />
           <Route
             path="/home"
@@ -80,7 +81,16 @@ export default function App() {
             path="/animal/:id"
             element={
               <>
-                <ProfileAnimal/>
+                <ProfileAnimal />
+              </>
+            }
+          />
+
+          <Route
+            path="/news"
+            element={
+              <>
+                <News />
               </>
             }
           />

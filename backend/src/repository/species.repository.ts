@@ -9,8 +9,7 @@ export class _SpeciesRepository{
         let species;
         species = await manager.find(Species, {relations:['animalProfiles', 'posts', 'organizations', 'users']})
        species.forEach(element => {
-           element.alive = JSON.parse(element.alive)
-           element.geoData && element.geoData.length>0 && (element.geoData = JSON.parse(element.geoData))
+        //    element.geoData && element.geoData.length>0 && (element.geoData = JSON.parse(element.geoData))
        });
         return species
     }
@@ -31,8 +30,7 @@ export class _SpeciesRepository{
     public async findById(speciesId: number, entityManager?: EntityManager): Promise<Species|undefined>{
         const manager = entityManager || getManager();
         let species;
-        species = await manager.findOne(Species, speciesId, {relations:['animalProfiles', 'posts', 'organizations', 'users']})
-        species.alive && (species.alive = JSON.parse(species.alive))
+        species = await manager.findOne(Species, speciesId, {relations:['animalProfiles', 'posts', 'organizations', 'users', 'animalProfiles.users']})
         species.geoData && species.geoData.length>0 && (species.geoData = JSON.parse(species.geoData))
            
         return species

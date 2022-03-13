@@ -12,6 +12,12 @@ export class Organization{
     description: string;
 
     @Column({nullable: true})
+    webSiteURL: string;
+
+    @Column({nullable: true})
+    logoImage: string;
+
+    @Column({nullable: true})
     location: string;
 
     @ManyToOne(() => User, user => user.organizations)
@@ -24,6 +30,7 @@ export class Organization{
         this.name = post?.name ?? '' 
         this.description = post?.description ?? '' 
         this.location = post?.location ?? ''
-        this.users = post?.users 
+        this.webSiteURL = post?.webSiteURL ?? ''
+        this.logoImage = post?.logoImage  ?? ''
     }
 }

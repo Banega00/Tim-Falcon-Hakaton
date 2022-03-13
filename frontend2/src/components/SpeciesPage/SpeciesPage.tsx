@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 // import styles from './SpeciesPage.module.scss'
 import styles from './SpeciesPage.module.scss'
 import { MapContainer, TileLayer, Marker, Popup, Polygon } from 'react-leaflet'
-import slika from '../../images/beloglavi-sup-2.jpg'
+// import slika from '../../images/beloglavi-sup-2.jpg'
 import { flipCoordinatesArray } from '../../utils/util-functions';
 import { useParams } from 'react-router-dom';
 import { HttpService } from '../../utils/HttpService';
-import { GeoData, Species } from '../../models/Species.entity';
+import { Species } from '../../models/Species.entity';
 import { ResponseModel } from '../../models/ResponseModel';
+import bgImg from "../../images/bgg.jpg";
 
 export const colorBasedOnNumber = (num:number | undefined)=>{
   if(!num) return 'black'
@@ -20,14 +21,12 @@ export const colorBasedOnNumber = (num:number | undefined)=>{
 export const SpeciesPage: React.FC<any> = () => {
   let { id } = useParams();
   const [speciesData, setSpeciesData] = useState<Species | undefined>(undefined);
-  const [geoData, setGeoData] = useState<GeoData[][] | undefined>(undefined);
   useEffect(()=>{
     if(id && +id){
       HttpService.getSpeciesData(id)
       .then(axiosResponse =>{
         const response:ResponseModel = axiosResponse.data;
         setSpeciesData(response.payload)
-        setGeoData(JSON.parse(response.payload.geoData))
       })
     }
   },[])
@@ -38,15 +37,13 @@ export const SpeciesPage: React.FC<any> = () => {
         <div className={styles.firstPart}>
           {speciesData && <div className={styles.sName}><p>{speciesData.name}</p></div>}
           {/* <div className={styles.mainImg} src="/src/images/beloglavi-sup-2.jpg"/> */}
-          <img className={styles.mainImg} src={slika} alt="" />
-          <div>
-            O vrsti:
-            {speciesData && speciesData.description}
+          {speciesData && <img className={styles.mainImg} src={require(`../../images/${speciesData?.images[0]}`)} alt="" />}
+          <div className={styles.about}>
+            <span className={styles.span}>O vrsti</span>: {speciesData && speciesData.description}
           </div>
 
-          <div>
-            Broj jedinki:
-            {speciesData && speciesData.alive}
+          <div className={styles.about}>
+            <span className={styles.span}>Broj jedinki:</span> {speciesData && speciesData.alive}
           </div>
         </div>
 
@@ -62,9 +59,12 @@ export const SpeciesPage: React.FC<any> = () => {
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>
           </Marker>
-          {geoData && speciesData?.alive && geoData.map((polygon, index) => <Polygon pathOptions={{ color: 'black', fillColor: colorBasedOnNumber(speciesData?.alive[index]), weight: 1, fillOpacity:0.5 }} positions={flipCoordinatesArray(polygon)} />)})
+          {speciesData?.geoData && speciesData?.alive && speciesData.geoData.map((polygon, index) => <Polygon pathOptions={{ color: 'black', fillColor: colorBasedOnNumber(speciesData?.alive[index]), weight: 1, fillOpacity:0.5 }} positions={flipCoordinatesArray(polygon)} />)})
         </MapContainer>
 
+        <div className={styles.organizations}>
+          <div className={styles.organization}></div>
+        </div>
 
 
       </div>

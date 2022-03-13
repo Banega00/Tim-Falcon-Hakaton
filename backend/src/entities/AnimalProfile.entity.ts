@@ -16,6 +16,9 @@ export class AnimalProfile{
     @JoinTable()
     species?:Species | undefined;
 
+    @Column({nullable: true})
+    location?: string;
+
     @Column(
         'simple-array',
         {

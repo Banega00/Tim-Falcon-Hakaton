@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styles from "./EndangeredSpecies.module.scss";
 import EndangeredSpeciesCard from '../EndangeredSpeciesCard/EndangeredSpeciesCard';
 import Sheep from '../../images/goat.png';
@@ -8,16 +8,28 @@ import Snail from '../../images/snail.png';
 import Kakapo from '../../images/parrot.png';
 import Albatros from '../../images/crane.png';
 import Vaquita from '../../images/dolphin.png'
+import { ConservationStatus } from '../../models/Enums';
 
 
 
 const EndangeredSpecies = () => {
-
+    const [conservationStatus, setConservationStatus] = useState<number>(1);
+    const statusesArray = Object.values(ConservationStatus)
+    let handleConservationStatus = (event) =>{
+        setConservationStatus(+event.target.value)
+    }
     return(
         <section className={styles.endangeredSpecies}>
             <div className={styles.endangeredSpeciesContainer}>
             <h1>Endangered Species</h1>
-            
+            <div>
+                FILTER:
+                <label htmlFor="conservationStatus">
+                Conservation Status
+                <input type="range" name="conservationStatus" onChange={handleConservationStatus} min="1" max="8"/>
+                </label>
+                {conservationStatus && <div>{statusesArray[statusesArray.length-conservationStatus]}</div>}
+            </div>
             <div className={styles.cards}>
                 <EndangeredSpeciesCard img={ Sheep } text="Barbary Sheep" left= "5,000 - 10,000" habitat="North America, Europe"/>
                 <EndangeredSpeciesCard img={ Leopard } text="Amur Leopard" left= "70" habitat="Asia"/>

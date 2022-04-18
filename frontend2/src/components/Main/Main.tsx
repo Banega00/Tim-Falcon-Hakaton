@@ -8,7 +8,6 @@ import { Parallax } from "react-parallax";
 
 import { HttpService } from "../../utils/HttpService";
 const Main = () => {
-  
 
   return (
     <div className={styles.main}>
